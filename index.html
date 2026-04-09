@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liza Chuiko — Product Designer & Builder</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f4f0;
+      --fg: #0e0e0e;
+      --red: #e0200f;
+      --gray: #888;
+      --mid: #444;
+      --border: #d4d2cc;
+      --mono: 'Courier New', Courier, monospace;
+      --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--fg); font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── HEADER ─── */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .logo span { color: var(--red); }
+
+    nav {
+      display: flex;
+      gap: 32px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    nav a { color: var(--gray); transition: color 0.2s; }
+    nav a:hover { color: var(--fg); }
+
+    .nav-badge {
+      display: inline-block;
+      background: var(--red);
+      color: white;
+      font-size: 8px;
+      padding: 1px 5px;
+      border-radius: 2px;
+      vertical-align: middle;
+      margin-left: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── TICKER ─── */
+    .ticker {
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      background: var(--fg);
+      color: var(--bg);
+      padding: 10px 0;
+      white-space: nowrap;
+    }
+
+    .ticker-track {
+      display: inline-flex;
+      gap: 0;
+      animation: ticker 28s linear infinite;
+    }
+
+    .ticker-track:hover { animation-play-state: paused; }
+
+    @keyframes ticker {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 32px;
+      font-size: 11px;
+      font-family: var(--mono);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    .ticker-item em {
+      font-style: normal;
+      color: var(--red);
+      opacity: 1;
+    }
+
+    .ticker-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 72px 40px 60px;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: end;
+    }
+
+    .hero-title {
+      font-size: clamp(54px, 9.5vw, 138px);
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+    }
+    .hero-title em { font-style: normal; color: var(--red); }
+
+    .hero-sub {
+      margin-top: 30px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--mid);
+      max-width: 520px;
+    }
+    .hero-sub strong { color: var(--fg); font-weight: 600; }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 26px;
+    }
+
+    .tag {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      font-family: var(--mono);
+      color: var(--gray);
+    }
+    .tag.red { border-color: var(--red); color: var(--red); }
+
+    .hero-right { text-align: right; }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: var(--mono);
+      color: var(--fg);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      margin-bottom: 20px;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.25; }
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: flex-end;
+    }
+
+    .hero-meta-item { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+    .hero-meta-label {
+      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gray); font-family: var(--mono);
+    }
+    .hero-meta-value { font-size: 13px; font-weight: 500; }
+
+    /* ─── VIBE CODING BLOCK ─── */
+    .vibe-section {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .vibe-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .vibe-header-left {
+      padding: 48px 40px 44px;
+      border-right: 1px solid var(--border);
+    }
+
+    .vibe-header-right {
+      padding: 48px 40px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .vibe-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gray);
+      font-family: var(--mono);
+      margin-bottom: 16px;
+    }
+
+    .vibe-title {
+      font-size: clamp(32px, 4.5vw, 68px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.025em;
+      line-height: 0.93;
+    }
+
+    .vibe-title em { font-style: normal; color: var(--red); }
+
+    .vibe-desc {
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--mid);
+      max-width: 420px;
+      margin-top: 22px;
+    }
+
+    .vibe-desc strong { color: var(--fg); }
+
+    /* stack pills */
+    .stack-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .stack-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      font-family: var(--mono);
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      transition: background 0.18s, border-color 0.18s, color 0.18s;
+      cursor: default;
+    }
+
+    .stack-pill:hover {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg);
+    }
+
+    .stack-pill .pill-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
+    /* right side: approach cards */
+    .approach-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .approach-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .approach-item:last-child { border-bottom: none; }
+
+    .approach-num {
+      font-size: 11px;
+      font-family: var(--mono);
+      color: var(--red);
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .approach-text strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 3px;
+    }
+
+    .approach-text span {
+      font-size: 11px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    .vibe-github-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 24px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-family: var(--mono);
+      border: 1px solid var(--fg);
+      padding: 10px 18px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .vibe-github-link:hover {
+      background: var(--fg);
+      color: var(--bg);
+    }
+
+    /* ─── TERMINAL BLOG FEED ─── */
+    .blog-feed {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .blog-card {
+      padding: 28px;
+      border-right: 1px solid var(--border);
+      display: block;
+      transition: background 0.2s;
+      position: relative;
+    }
+
+    .blog-card:last-child { border-right: none; }
+
+    .blog-card:hover { background: var(--fg); color: var(--bg); }
+    .blog-card:hover .blog-date,
+    .blog-card:hover .blog-tag,
+    .blog-card:hover .blog-desc { color: rgba(245,244,240,0.5); border-color: rgba(245,244,240,0.2); }
+    .blog-card:hover .blog-title { color: var(--bg); }
+    .blog-card:hover .blog-arrow { color: var(--bg); }
+
+    .blog-date {
+      font-size: 9px;
+      font-family: var(--mono);
+      letter-spacing: 0.15em;
+      color: var(--gray);
+      margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+
+    .blog-tag {
+      display: inline-block;
+      font-size: 9px;
+      font-family: var(--mono);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid var(--red);
+      color: var(--red);
+      padding: 2px 7px;
+      margin-bottom: 14px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .blog-title {
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      margin-bottom: 10px;
+      transition: color 0.2s;
+    }
+
+    .blog-desc {
+      font-size: 11px;
+      color: var(--gray);
+      line-height: 1.6;
+      transition: color 0.2s;
+    }
+
+    .blog-arrow {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      font-size: 16px;
+      color: var(--gray);
+      transition: color 0.2s;
+    }
+
+    /* ─── SECTION HEADER ─── */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 20px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gray);
+      font-family: var(--mono);
+    }
+
+    .section-note {
+      font-size: 10px;
+      color: var(--gray);
+      font-family: var(--mono);
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── PROJECTS GRID ─── */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-card {
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: block;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .project-card:nth-child(2n) { border-right: none; }
+    .project-card:nth-last-child(-n+2) { border-bottom: none; }
+
+    .project-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: var(--fg);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-thumb img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: grayscale(15%);
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s;
+    }
+    .project-card:hover .project-thumb img { transform: scale(1.04); filter: grayscale(0%); }
+
+    .project-thumb-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.12);
+    }
+
+    .thumb-ozon      { background: #111827; }
+    .thumb-tribune   { background: #0d1b2a; }
+    .thumb-sber      { background: #0f1f0f; }
+    .thumb-postomates{ background: #1f0f0f; }
+
+    .project-number {
+      position: absolute; top: 16px; left: 18px;
+      font-size: 10px; font-family: var(--mono);
+      color: rgba(255,255,255,0.25); letter-spacing: 0.1em;
+    }
+
+    .project-info {
+      padding: 22px 28px 26px;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+      position: relative;
+    }
+
+    .project-meta-row {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
+    }
+
+    .project-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+
+    .project-tag {
+      font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--red); font-family: var(--mono);
+      border: 1px solid rgba(224,32,15,0.35); padding: 2px 6px;
+    }
+
+    .project-year { font-size: 10px; color: var(--gray); font-family: var(--mono); letter-spacing: 0.08em; }
+
+    .project-name {
+      font-size: 21px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: -0.01em; line-height: 1.05; margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+    .project-card:hover .project-name { color: var(--red); }
+
+    .project-desc { font-size: 12px; color: var(--gray); line-height: 1.65; }
+
+    .project-metrics {
+      display: flex; gap: 24px; margin-top: 14px; padding-top: 14px;
+      border-top: 1px solid var(--border); flex-wrap: wrap;
+    }
+
+    .metric { display: flex; flex-direction: column; gap: 2px; }
+
+    .metric-value {
+      font-size: 18px; font-weight: 700; color: var(--fg); letter-spacing: -0.02em;
+    }
+
+    .metric-label {
+      font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gray); font-family: var(--mono);
+    }
+
+    .project-arrow {
+      position: absolute; top: 22px; right: 22px;
+      width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 13px;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .project-card:hover .project-arrow { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+
+    /* ─── ABOUT ─── */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-text {
+      padding: 60px 40px;
+      border-right: 1px solid var(--border);
+    }
+
+    .about-text h2 {
+      font-size: clamp(36px, 4.8vw, 72px);
+      font-weight: 700; text-transform: uppercase;
+      letter-spacing: -0.025em; line-height: 0.93; margin-bottom: 28px;
+    }
+    .about-text h2 em { font-style: normal; color: var(--red); }
+
+    .about-text p {
+      font-size: 14px; line-height: 1.8; color: var(--mid);
+      margin-bottom: 14px; max-width: 460px;
+    }
+    .about-text p strong { color: var(--fg); font-weight: 600; }
+
+    .visa-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--border); padding: 8px 14px;
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      font-family: var(--mono); margin-top: 16px;
+    }
+
+    .about-right { padding: 60px 40px; }
+
+    .exp-group-title {
+      font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gray); font-family: var(--mono); margin-bottom: 16px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    }
+
+    .exp-item {
+      display: grid; grid-template-columns: 1fr auto; gap: 8px;
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+    }
+    .exp-item:last-child { border-bottom: none; }
+
+    .exp-company { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: -0.01em; }
+    .exp-role    { font-size: 11px; color: var(--gray); margin-top: 2px; }
+    .exp-period  { font-size: 10px; font-family: var(--mono); color: var(--gray); letter-spacing: 0.06em; text-align: right; white-space: nowrap; }
+    .exp-type    { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; font-family: var(--mono); color: var(--red); margin-top: 2px; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 40px; align-items: end; padding: 56px 40px 48px;
+    }
+
+    .footer-cta-label {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gray); font-family: var(--mono); margin-bottom: 16px;
+    }
+
+    .footer-cta {
+      font-size: clamp(28px, 4.5vw, 64px); font-weight: 700;
+      text-transform: uppercase; letter-spacing: -0.025em; line-height: 1;
+    }
+
+    .footer-cta a { color: var(--red); border-bottom: 3px solid var(--red); transition: opacity 0.2s; }
+    .footer-cta a:hover { opacity: 0.6; }
+
+    .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+    .footer-links { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+    .footer-links a {
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gray); font-family: var(--mono); transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--fg); }
+    .footer-copy { font-size: 9px; color: var(--border); font-family: var(--mono); margin-top: 4px; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      header { padding: 18px 20px; }
+      nav { gap: 18px; }
+      .hero { grid-template-columns: 1fr; padding: 44px 20px 36px; }
+      .hero-right { text-align: left; }
+      .hero-meta { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 18px; }
+      .hero-meta-item { align-items: flex-start; }
+      .section-header { padding: 16px 20px; }
+      .vibe-header { grid-template-columns: 1fr; }
+      .vibe-header-left { border-right: none; border-bottom: 1px solid var(--border); padding: 36px 20px; }
+      .vibe-header-right { padding: 36px 20px; }
+      .blog-feed { grid-template-columns: 1fr; }
+      .blog-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .blog-card:last-child { border-bottom: none; }
+      .projects { grid-template-columns: 1fr; }
+      .project-card:nth-child(2n) { border-right: 1px solid var(--border); }
+      .project-info { padding: 18px 20px 20px; }
+      .about { grid-template-columns: 1fr; }
+      .about-text { border-right: none; border-bottom: 1px solid var(--border); padding: 40px 20px; }
+      .about-right { padding: 40px 20px; }
+      footer { grid-template-columns: 1fr; padding: 40px 20px; }
+      .footer-right { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">Liza <span>Chuiko</span></div>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#vibe">Vibe <span class="nav-badge">code</span></a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item"><span class="ticker-dot"></span>Claude <em>Sonnet 4.6</em></span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Cursor IDE</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>MCP <em>Prototyping</em></span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Vibe Coding</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>GitHub Pages</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Figma <em>→</em> Code</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>HTML / CSS / JS</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Building in <em>Public</em></span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Design <em>×</em> Engineering</span>
+      <!-- duplicate for seamless loop -->
+      <span class="ticker-item"><span class="ticker-dot"></span>Claude <em>Sonnet 4.6</em></span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Cursor IDE</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>MCP <em>Prototyping</em></span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Vibe Coding</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>GitHub Pages</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Figma <em>→</em> Code</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>HTML / CSS / JS</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Building in <em>Public</em></span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Design <em>×</em> Engineering</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1 class="hero-title">Product<br>Designer<br><em>&amp; Builder</em></h1>
+      <p class="hero-sub">
+        I design <strong>AI-powered B2B products</strong> from zero to scale — interfaces, systems, workflows, internal tools. Now building my own stuff in code and shipping it to the web.
+      </p>
+      <div class="hero-tags">
+        <span class="tag">B2B &amp; SaaS</span>
+        <span class="tag">AI Products</span>
+        <span class="tag">Design Systems</span>
+        <span class="tag">Figma → Code</span>
+        <span class="tag red">100+ mentees</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        Open to work
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Location</span>
+          <span class="hero-meta-value">London, UK</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Visa</span>
+          <span class="hero-meta-value">Global Talent</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Experience</span>
+          <span class="hero-meta-value">7+ years</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── VIBE CODING ─── -->
+  <div id="vibe" class="vibe-section">
+
+    <div class="vibe-header">
+      <div class="vibe-header-left">
+        <div class="vibe-eyebrow">New chapter — 2025</div>
+        <h2 class="vibe-title">Vibe<br><em>Coding</em><br>Era</h2>
+        <p class="vibe-desc">
+          I'm a designer who learned to <strong>build in code</strong>. Using Claude, Cursor, and MCP tools I prototype, ship, and iterate on real products — not just mockups. This page is one of them.
+        </p>
+        <p class="vibe-desc">
+          My GitHub is a live log of how I work: commits, experiments, mini-products, side hustles. Design thinking × engineering execution.
+        </p>
+        <div class="stack-row">
+          <span class="stack-pill"><span class="pill-dot"></span>Claude Sonnet</span>
+          <span class="stack-pill"><span class="pill-dot"></span>Cursor</span>
+          <span class="stack-pill"><span class="pill-dot"></span>MCP</span>
+          <span class="stack-pill"><span class="pill-dot"></span>HTML / CSS</span>
+          <span class="stack-pill"><span class="pill-dot"></span>JavaScript</span>
+          <span class="stack-pill"><span class="pill-dot"></span>React</span>
+          <span class="stack-pill"><span class="pill-dot"></span>GitHub Pages</span>
+          <span class="stack-pill"><span class="pill-dot"></span>Framer</span>
+        </div>
+        <a class="vibe-github-link" href="https://github.com/Lizachuiko" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          github.com/Lizachuiko — see the commits →
+        </a>
+      </div>
+
+      <div class="vibe-header-right">
+        <div class="vibe-eyebrow">How I work now</div>
+        <div class="approach-list">
+          <div class="approach-item">
+            <span class="approach-num">01</span>
+            <div class="approach-text">
+              <strong>Idea → Prototype in hours</strong>
+              <span>MCP + Claude to go from concept to clickable prototype without leaving the design context.</span>
+            </div>
+          </div>
+          <div class="approach-item">
+            <span class="approach-num">02</span>
+            <div class="approach-text">
+              <strong>Design → Real code</strong>
+              <span>Cursor + Claude Sonnet to turn Figma into working HTML/CSS/React. No handoff needed.</span>
+            </div>
+          </div>
+          <div class="approach-item">
+            <span class="approach-num">03</span>
+            <div class="approach-text">
+              <strong>Ship, iterate, commit</strong>
+              <span>GitHub as a public log of process. Each project lives there — open, forkable, real.</span>
+            </div>
+          </div>
+          <div class="approach-item">
+            <span class="approach-num">04</span>
+            <div class="approach-text">
+              <strong>Side hustles as mini-products</strong>
+              <span>Building small things to learn fast — landing pages, tools, experiments. All live on GitHub Pages.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOG / BUILDS FEED -->
+    <div class="section-header">
+      <span class="section-label">Building in Public — Log</span>
+      <span class="section-note">github.com/Lizachuiko</span>
+    </div>
+
+    <div class="blog-feed">
+
+      <a class="blog-card" href="https://github.com/Lizachuiko" target="_blank">
+        <div class="blog-date">Apr 2025</div>
+        <div class="blog-tag">Portfolio</div>
+        <div class="blog-title">This site — built with Claude</div>
+        <p class="blog-desc">Portfolio page vibe-coded from scratch using Claude Sonnet + Cursor. Zero templates. Hosted on GitHub Pages.</p>
+        <span class="blog-arrow">↗</span>
+      </a>
+
+      <a class="blog-card" href="https://github.com/Lizachuiko" target="_blank">
+        <div class="blog-date">Coming soon</div>
+        <div class="blog-tag">Mini-product</div>
+        <div class="blog-title">Project #2</div>
+        <p class="blog-desc">Next thing I'm building — will drop here when it's ready. Follow on GitHub for updates.</p>
+        <span class="blog-arrow">↗</span>
+      </a>
+
+      <a class="blog-card" href="https://github.com/Lizachuiko" target="_blank">
+        <div class="blog-date">Coming soon</div>
+        <div class="blog-tag">Experiment</div>
+        <div class="blog-title">Project #3</div>
+        <p class="blog-desc">Learning something new and shipping it publicly. More in the commits.</p>
+        <span class="blog-arrow">↗</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- DESIGN WORK -->
+  <div class="section-header" id="work">
+    <span class="section-label">Design Work — Selected Cases</span>
+    <span class="section-note">004 projects</span>
+  </div>
+
+  <div class="projects">
+
+    <a class="project-card" href="https://liza-chuiko-design.webflow.io/case-ozon" target="_blank">
+      <div class="project-thumb thumb-ozon">
+        <span class="project-number">01</span>
+        <div class="project-thumb-placeholder">OZON</div>
+      </div>
+      <div class="project-info">
+        <div class="project-meta-row">
+          <div class="project-tags">
+            <span class="project-tag">B2B</span>
+            <span class="project-tag">Internal Tool</span>
+            <span class="project-tag">Monitoring</span>
+          </div>
+          <span class="project-year">2022–23</span>
+        </div>
+        <div class="project-name">Ozon — Incident Management</div>
+        <p class="project-desc">Unified observability platform merging logging, tracing and alerting into one interface for 90% of the IT team.</p>
+        <div class="project-metrics">
+          <div class="metric">
+            <span class="metric-value">−35%</span>
+            <span class="metric-label">Resolution time</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">+40%</span>
+            <span class="metric-label">Adoption</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">−12%</span>
+            <span class="metric-label">Incidents</span>
+          </div>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </a>
+
+    <a class="project-card" href="https://liza-chuiko-design.webflow.io/case-tribune" target="_blank">
+      <div class="project-thumb thumb-tribune">
+        <span class="project-number">02</span>
+        <div class="project-thumb-placeholder">TRIBUNE</div>
+      </div>
+      <div class="project-info">
+        <div class="project-meta-row">
+          <div class="project-tags">
+            <span class="project-tag">B2B</span>
+            <span class="project-tag">SaaS</span>
+            <span class="project-tag">HR Tech</span>
+          </div>
+          <span class="project-year">2024</span>
+        </div>
+        <div class="project-name">Tribune — HR Platform</div>
+        <p class="project-desc">Navigation overhaul, matrix org view, widget dashboards and smart calendar for global remote teams.</p>
+        <div class="project-metrics">
+          <div class="metric">
+            <span class="metric-value">+30%</span>
+            <span class="metric-label">DAU</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">+15pt</span>
+            <span class="metric-label">NPS</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">−20%</span>
+            <span class="metric-label">HR task time</span>
+          </div>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </a>
+
+    <a class="project-card" href="https://liza-chuiko-design.webflow.io/case-sberauto" target="_blank">
+      <div class="project-thumb thumb-sber">
+        <span class="project-number">03</span>
+        <div class="project-thumb-placeholder">SBERAUTO</div>
+      </div>
+      <div class="project-info">
+        <div class="project-meta-row">
+          <div class="project-tags">
+            <span class="project-tag">B2C</span>
+            <span class="project-tag">Marketplace</span>
+            <span class="project-tag">Mobile</span>
+          </div>
+          <span class="project-year">2020–22</span>
+        </div>
+        <div class="project-name">SberAuto — Seller Flow</div>
+        <p class="project-desc">Simplified car listing with auto-fill from documents, drag-and-drop photos and real-time price estimates.</p>
+        <div class="project-metrics">
+          <div class="metric">
+            <span class="metric-value">+24%</span>
+            <span class="metric-label">Completed listings</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">9×</span>
+            <span class="metric-label">Assortment</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">−30%</span>
+            <span class="metric-label">Drop-off</span>
+          </div>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </a>
+
+    <a class="project-card" href="https://liza-chuiko-design.webflow.io/" target="_blank">
+      <div class="project-thumb thumb-postomates">
+        <span class="project-number">04</span>
+        <div class="project-thumb-placeholder">POSTOMATES</div>
+      </div>
+      <div class="project-info">
+        <div class="project-meta-row">
+          <div class="project-tags">
+            <span class="project-tag">Startup</span>
+            <span class="project-tag">Marketplace</span>
+          </div>
+          <span class="project-year">2023</span>
+        </div>
+        <div class="project-name">Postomates — Delivery App</div>
+        <p class="project-desc">Package delivery marketplace — end-to-end from zero: user flows, brand, mobile interface.</p>
+        <div class="project-arrow">↗</div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ABOUT -->
+  <div class="section-header" id="about">
+    <span class="section-label">About</span>
+  </div>
+
+  <div class="about">
+    <div class="about-text">
+      <h2>Design<br><em>+</em> build<br>+ ship</h2>
+      <p>Product and UI/UX designer based in London with <strong>7+ years</strong> building digital products — B2B SaaS, AI tools, marketplaces, internal platforms.</p>
+      <p>I own products end-to-end: research, system design, engineering collaboration, shipping. Currently adding <strong>code</strong> to that stack — building real things with Claude and Cursor.</p>
+      <p>Mentoring <strong>100+ designers</strong> through ADPList and Women in Tech — from first jobs to senior roles.</p>
+      <div class="visa-badge">🇬🇧 UK Global Talent Visa — Exceptional Promise</div>
+    </div>
+    <div class="about-right">
+      <div class="exp-group-title">Experience</div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-company">ClaimSorted</div>
+          <div class="exp-role">Product Designer — AI Startup</div>
+        </div>
+        <div>
+          <div class="exp-period">2025–26</div>
+          <div class="exp-type">Full-time</div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-company">Romantic AI</div>
+          <div class="exp-role">Product Designer — AI dating app</div>
+        </div>
+        <div>
+          <div class="exp-period">2024</div>
+          <div class="exp-type">Startup</div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-company">Ozon</div>
+          <div class="exp-role">Senior Product Designer — B2B / ecom</div>
+        </div>
+        <div>
+          <div class="exp-period">2022–23</div>
+          <div class="exp-type">Full-time</div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-company">SberAuto</div>
+          <div class="exp-role">Lead Product Designer — Marketplace</div>
+        </div>
+        <div>
+          <div class="exp-period">2020–22</div>
+          <div class="exp-type">Full-time</div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-company">Sports.ru</div>
+          <div class="exp-role">Product Designer — Media / Health</div>
+        </div>
+        <div>
+          <div class="exp-period">2019–20</div>
+          <div class="exp-type">Full-time</div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-company">Tribune / imii</div>
+          <div class="exp-role">Senior Designer — HR tech, AI immigration</div>
+        </div>
+        <div>
+          <div class="exp-period">2023–24</div>
+          <div class="exp-type">Part-time</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div>
+      <div class="footer-cta-label">Get in touch</div>
+      <div class="footer-cta">
+        Let's build<br>something —<br><a href="mailto:lizachuiko218@gmail.com">say hello ↗</a>
+      </div>
+    </div>
+    <div class="footer-right">
+      <div class="footer-links">
+        <a href="https://github.com/Lizachuiko" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/elizaveta-chuiko-1a038ab4/" target="_blank">LinkedIn</a>
+        <a href="https://liza-chuiko-design.webflow.io/" target="_blank">Full Portfolio →</a>
+        <a href="mailto:lizachuiko218@gmail.com">lizachuiko218@gmail.com</a>
+      </div>
+      <div class="footer-copy">© 2025 Liza Chuiko — London, UK</div>
+    </div>
+  </footer>
+
+</body>
+</html>
