@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TextMagic Settings</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f4f0;
+      --fg: #0e0e0e;
+      --red: #e0200f;
+      --gray: #888;
+      --border: #d4d2cc;
+      --mono: 'Courier New', monospace;
+      --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      width: 300px;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header */
+    .header {
+      background: var(--fg);
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #f5f4f0;
+    }
+
+    .logo span { color: var(--red); }
+
+    .version {
+      font-size: 9px;
+      font-family: var(--mono);
+      color: rgba(245,244,240,0.4);
+      letter-spacing: 0.1em;
+    }
+
+    /* Body */
+    .body { padding: 16px 18px; }
+
+    .field { margin-bottom: 16px; }
+
+    label {
+      display: block;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray);
+      font-family: var(--mono);
+      margin-bottom: 6px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 4px;
+      padding: 8px 10px;
+      font-size: 12px;
+      font-family: var(--sans);
+      outline: none;
+      color: var(--fg);
+      transition: border-color 0.15s;
+    }
+
+    input:focus, textarea:focus { border-color: var(--fg); }
+
+    input[type="password"] { letter-spacing: 0.1em; }
+
+    textarea { resize: none; line-height: 1.5; }
+
+    .hint {
+      font-size: 10px;
+      color: var(--gray);
+      font-family: var(--mono);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .hint a { color: var(--red); }
+
+    /* Save button */
+    .save-btn {
+      width: 100%;
+      background: var(--fg);
+      color: var(--bg);
+      border: none;
+      border-radius: 4px;
+      padding: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: var(--sans);
+      transition: opacity 0.15s;
+      margin-top: 4px;
+    }
+    .save-btn:hover { opacity: 0.8; }
+
+    /* Status */
+    .status {
+      font-size: 11px;
+      font-family: var(--mono);
+      text-align: center;
+      margin-top: 10px;
+      min-height: 16px;
+      color: var(--red);
+      letter-spacing: 0.06em;
+    }
+
+    /* Divider */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 14px 0;
+    }
+
+    /* API key status indicator */
+    .key-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-family: var(--mono);
+      letter-spacing: 0.08em;
+      color: var(--gray);
+      margin-top: 6px;
+    }
+
+    .key-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ccc;
+      flex-shrink: 0;
+    }
+
+    .key-dot.active { background: #22c55e; }
+
+    /* Footer */
+    .footer {
+      padding: 10px 18px 14px;
+      font-size: 9px;
+      font-family: var(--mono);
+      letter-spacing: 0.1em;
+      color: var(--border);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <span class="logo">Text<span>Magic</span></span>
+    <span class="version">v0.1</span>
+  </div>
+
+  <div class="body">
+
+    <div class="field">
+      <label>OpenAI API Key</label>
+      <input type="password" id="api-key" placeholder="sk-..." autocomplete="off" />
+      <div class="key-status">
+        <span class="key-dot" id="key-dot"></span>
+        <span id="key-label">No key saved</span>
+      </div>
+      <p class="hint">Get your key at <a href="https://platform.openai.com/api-keys" target="_blank">platform.openai.com</a></p>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="field">
+      <label>Your Writing Style</label>
+      <textarea id="user-style" rows="3" placeholder="Concise, direct, no fluff. I write in English but sometimes mix in Russian…"></textarea>
+      <p class="hint">AI will use this when editing and generating text.</p>
+    </div>
+
+    <button class="save-btn" id="save">Save settings</button>
+    <div class="status" id="status"></div>
+
+  </div>
+
+  <div class="footer">TextMagic — AI in every input</div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

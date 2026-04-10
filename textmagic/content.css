@@ -1,0 +1,291 @@
+/* ─── TextMagic — injected styles ─── */
+
+.tm-btn {
+  position: absolute;
+  z-index: 2147483647;
+  width: 26px;
+  height: 26px;
+  background: #0e0e0e;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #e0200f;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  transition: transform 0.15s, background 0.15s;
+  pointer-events: all;
+  user-select: none;
+  line-height: 1;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.tm-btn:hover {
+  transform: scale(1.1);
+  background: #1a1a1a;
+}
+
+.tm-btn.tm-loading {
+  animation: tm-spin 1s linear infinite;
+}
+
+@keyframes tm-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ─── Panel ─── */
+.tm-panel {
+  position: absolute;
+  z-index: 2147483647;
+  width: 320px;
+  background: #f5f4f0;
+  border: 1px solid #d4d2cc;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.1);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  color: #0e0e0e;
+  overflow: hidden;
+  animation: tm-appear 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes tm-appear {
+  from { opacity: 0; transform: translateY(6px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.tm-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px 0;
+}
+
+.tm-logo {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0e0e0e;
+}
+
+.tm-logo span { color: #e0200f; }
+
+.tm-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #888;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.15s;
+}
+.tm-close:hover { color: #0e0e0e; }
+
+/* ─── Tabs ─── */
+.tm-tabs {
+  display: flex;
+  padding: 10px 12px 0;
+  gap: 4px;
+}
+
+.tm-tab {
+  flex: 1;
+  background: none;
+  border: 1px solid #d4d2cc;
+  padding: 6px 4px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: #888;
+  border-radius: 4px;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.tm-tab:hover { border-color: #0e0e0e; color: #0e0e0e; }
+
+.tm-tab.tm-tab-active {
+  background: #0e0e0e;
+  border-color: #0e0e0e;
+  color: #f5f4f0;
+}
+
+/* ─── Tab content ─── */
+.tm-body {
+  padding: 12px;
+}
+
+.tm-tab-content { display: none; }
+.tm-tab-content.tm-active { display: block; }
+
+/* ─── Quick actions ─── */
+.tm-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.tm-quick-btn {
+  font-size: 10px;
+  font-family: inherit;
+  letter-spacing: 0.06em;
+  padding: 4px 9px;
+  border: 1px solid #d4d2cc;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 3px;
+  color: #444;
+  transition: all 0.15s;
+}
+
+.tm-quick-btn:hover {
+  border-color: #0e0e0e;
+  background: #0e0e0e;
+  color: #f5f4f0;
+}
+
+/* ─── Textarea ─── */
+.tm-input {
+  width: 100%;
+  border: 1px solid #d4d2cc;
+  background: #fff;
+  border-radius: 4px;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-family: inherit;
+  resize: none;
+  outline: none;
+  color: #0e0e0e;
+  line-height: 1.5;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+.tm-input:focus { border-color: #0e0e0e; }
+.tm-input::placeholder { color: #aaa; }
+
+/* ─── Lang select ─── */
+.tm-select {
+  width: 100%;
+  border: 1px solid #d4d2cc;
+  background: #fff;
+  border-radius: 4px;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-family: inherit;
+  outline: none;
+  color: #0e0e0e;
+  cursor: pointer;
+  margin-bottom: 8px;
+  box-sizing: border-box;
+}
+
+/* ─── Submit button ─── */
+.tm-submit {
+  width: 100%;
+  background: #0e0e0e;
+  color: #f5f4f0;
+  border: none;
+  border-radius: 4px;
+  padding: 9px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s;
+  margin-top: 8px;
+}
+.tm-submit:hover   { opacity: 0.8; }
+.tm-submit:disabled { opacity: 0.4; cursor: wait; }
+
+/* ─── Result ─── */
+.tm-result {
+  display: none;
+  margin-top: 10px;
+  border-top: 1px solid #d4d2cc;
+  padding-top: 10px;
+}
+
+.tm-result.tm-visible { display: block; }
+
+.tm-result-text {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #0e0e0e;
+  background: #fff;
+  border: 1px solid #d4d2cc;
+  border-radius: 4px;
+  padding: 8px 10px;
+  max-height: 120px;
+  overflow-y: auto;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.tm-result-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.tm-result-btn {
+  flex: 1;
+  font-size: 10px;
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.tm-replace-btn {
+  background: #e0200f;
+  color: white;
+  border: 1px solid #e0200f;
+}
+.tm-replace-btn:hover { opacity: 0.85; }
+
+.tm-copy-btn {
+  background: transparent;
+  color: #444;
+  border: 1px solid #d4d2cc;
+}
+.tm-copy-btn:hover { border-color: #0e0e0e; color: #0e0e0e; }
+
+/* ─── Error ─── */
+.tm-error {
+  display: none;
+  font-size: 11px;
+  color: #e0200f;
+  margin-top: 6px;
+  padding: 6px 8px;
+  background: rgba(224,32,15,0.06);
+  border-radius: 3px;
+  line-height: 1.4;
+}
+.tm-error.tm-visible { display: block; }
+
+/* ─── Footer ─── */
+.tm-footer {
+  padding: 6px 12px 10px;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #bbb;
+  border-top: 1px solid #eee;
+  margin-top: 2px;
+  font-family: 'Courier New', monospace;
+}
