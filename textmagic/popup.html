@@ -3,51 +3,78 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TextMagic Settings</title>
+  <title>tecs settings</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #f5f4f0;
-      --fg: #0e0e0e;
-      --red: #e0200f;
-      --gray: #888;
-      --border: #d4d2cc;
-      --mono: 'Courier New', monospace;
-      --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       width: 300px;
-      background: var(--bg);
-      color: var(--fg);
-      font-family: var(--sans);
+      background: #080a1e;
+      color: #e8eeff;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
 
     /* Header */
     .header {
-      background: var(--fg);
-      padding: 16px 18px;
+      padding: 18px 18px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-bottom: 1px solid rgba(100,140,255,0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -40px; left: -40px;
+      width: 120px; height: 120px;
+      background: radial-gradient(circle, rgba(80,120,255,0.2), transparent 70%);
+      pointer-events: none;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* mini glass lens in header */
+    .logo-lens {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, rgba(180,210,255,0.85) 0%, rgba(80,120,240,0.6) 40%, rgba(10,10,40,0.85) 100%);
+      box-shadow: 0 0 0 1px rgba(120,160,255,0.4), 0 0 12px rgba(80,130,255,0.35), inset 0 1px 0 rgba(255,255,255,0.5);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .logo-lens::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.1) 45%, transparent 70%);
     }
 
     .logo {
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: #f5f4f0;
+      background: linear-gradient(135deg, #90b0ff, #c090ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-
-    .logo span { color: var(--red); }
 
     .version {
       font-size: 9px;
-      font-family: var(--mono);
-      color: rgba(245,244,240,0.4);
+      font-family: 'Courier New', monospace;
+      color: rgba(120,150,255,0.4);
       letter-spacing: 0.1em;
     }
 
@@ -62,115 +89,125 @@
       font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--gray);
-      font-family: var(--mono);
+      color: rgba(150,180,255,0.5);
+      font-family: 'Courier New', monospace;
       margin-bottom: 6px;
     }
 
-    input, textarea, select {
+    input, textarea {
       width: 100%;
-      border: 1px solid var(--border);
-      background: #fff;
-      border-radius: 4px;
+      border: 1px solid rgba(100,140,255,0.2);
+      background: rgba(255,255,255,0.04);
+      border-radius: 7px;
       padding: 8px 10px;
       font-size: 12px;
-      font-family: var(--sans);
+      font-family: inherit;
       outline: none;
-      color: var(--fg);
-      transition: border-color 0.15s;
+      color: #e8eeff;
+      transition: border-color 0.15s, background 0.15s;
     }
 
-    input:focus, textarea:focus { border-color: var(--fg); }
+    input:focus, textarea:focus {
+      border-color: rgba(100,150,255,0.5);
+      background: rgba(255,255,255,0.07);
+    }
 
     input[type="password"] { letter-spacing: 0.1em; }
-
     textarea { resize: none; line-height: 1.5; }
+
+    input::placeholder, textarea::placeholder { color: rgba(150,180,255,0.25); }
 
     .hint {
       font-size: 10px;
-      color: var(--gray);
-      font-family: var(--mono);
-      margin-top: 4px;
+      color: rgba(150,180,255,0.4);
+      font-family: 'Courier New', monospace;
+      margin-top: 5px;
       line-height: 1.4;
     }
+    .hint a { color: #7aa0ff; }
 
-    .hint a { color: var(--red); }
-
-    /* Save button */
-    .save-btn {
-      width: 100%;
-      background: var(--fg);
-      color: var(--bg);
-      border: none;
-      border-radius: 4px;
-      padding: 10px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      cursor: pointer;
-      font-family: var(--sans);
-      transition: opacity 0.15s;
-      margin-top: 4px;
-    }
-    .save-btn:hover { opacity: 0.8; }
-
-    /* Status */
-    .status {
-      font-size: 11px;
-      font-family: var(--mono);
-      text-align: center;
-      margin-top: 10px;
-      min-height: 16px;
-      color: var(--red);
-      letter-spacing: 0.06em;
-    }
-
-    /* Divider */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 14px 0;
-    }
-
-    /* API key status indicator */
+    /* Key status */
     .key-status {
       display: flex;
       align-items: center;
       gap: 6px;
       font-size: 10px;
-      font-family: var(--mono);
+      font-family: 'Courier New', monospace;
       letter-spacing: 0.08em;
-      color: var(--gray);
+      color: rgba(150,180,255,0.4);
       margin-top: 6px;
     }
 
     .key-dot {
-      width: 6px;
-      height: 6px;
+      width: 6px; height: 6px;
       border-radius: 50%;
-      background: #ccc;
+      background: rgba(150,180,255,0.2);
       flex-shrink: 0;
+      box-shadow: 0 0 4px rgba(80,130,255,0);
     }
 
-    .key-dot.active { background: #22c55e; }
+    .key-dot.active {
+      background: #7af0b0;
+      box-shadow: 0 0 6px rgba(80,240,160,0.6);
+    }
+
+    /* Divider */
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(100,140,255,0.1);
+      margin: 14px 0;
+    }
+
+    /* Save button */
+    .save-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #4a6ef0, #7a50e0);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 11px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.15s, box-shadow 0.15s;
+      box-shadow: 0 2px 16px rgba(80,100,240,0.35);
+      margin-top: 4px;
+    }
+    .save-btn:hover { opacity: 0.9; box-shadow: 0 2px 22px rgba(80,100,240,0.55); }
+
+    /* Status */
+    .status {
+      font-size: 11px;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      margin-top: 10px;
+      min-height: 16px;
+      letter-spacing: 0.06em;
+    }
 
     /* Footer */
     .footer {
       padding: 10px 18px 14px;
       font-size: 9px;
-      font-family: var(--mono);
-      letter-spacing: 0.1em;
-      color: var(--border);
-      border-top: 1px solid var(--border);
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.12em;
+      color: rgba(100,130,255,0.2);
+      border-top: 1px solid rgba(100,140,255,0.08);
       text-align: center;
+      text-transform: uppercase;
     }
   </style>
 </head>
 <body>
 
   <div class="header">
-    <span class="logo">Text<span>Magic</span></span>
+    <div class="logo-row">
+      <div class="logo-lens"></div>
+      <span class="logo">tecs</span>
+    </div>
     <span class="version">v0.1</span>
   </div>
 
@@ -191,7 +228,7 @@
     <div class="field">
       <label>Your Writing Style</label>
       <textarea id="user-style" rows="3" placeholder="Concise, direct, no fluff. I write in English but sometimes mix in Russian…"></textarea>
-      <p class="hint">AI will use this when editing and generating text.</p>
+      <p class="hint">AI uses this when editing and generating.</p>
     </div>
 
     <button class="save-btn" id="save">Save settings</button>
@@ -199,7 +236,7 @@
 
   </div>
 
-  <div class="footer">TextMagic — AI in every input</div>
+  <div class="footer">tecs — AI in every input</div>
 
   <script src="popup.js"></script>
 </body>

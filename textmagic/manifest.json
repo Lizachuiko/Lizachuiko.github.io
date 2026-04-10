@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "TextMagic — AI in every input",
+  "name": "tecs — AI in every input",
   "version": "0.1.0",
   "description": "Edit, translate, and generate text in any input field using AI",
   "permissions": [

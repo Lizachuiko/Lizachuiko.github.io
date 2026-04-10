@@ -97,7 +97,7 @@ function showBtn(el) {
   tmBtn = document.createElement('button');
   tmBtn.className = 'tm-btn';
   tmBtn.innerHTML = '✦';
-  tmBtn.title = 'TextMagic AI';
+  tmBtn.title = 'tecs AI';
 
   document.body.appendChild(tmBtn);
   positionBtn(el);
@@ -193,7 +193,7 @@ function createPanel() {
 
   panel.innerHTML = `
     <div class="tm-panel-header">
-      <span class="tm-logo">Text<span>Magic</span></span>
+      <span class="tm-logo">te<span>cs</span></span>
       <button class="tm-close" title="Close">×</button>
     </div>
 
@@ -244,7 +244,7 @@ function createPanel() {
 
     <div class="tm-error" id="tm-error"></div>
 
-    <div class="tm-footer">TextMagic v0.1 — powered by GPT-4o</div>
+    <div class="tm-footer">tecs v0.1 — powered by GPT-4o</div>
   `;
 
   // ── Tab switching ──

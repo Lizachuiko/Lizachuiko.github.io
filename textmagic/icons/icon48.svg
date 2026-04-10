@@ -1,4 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-  <rect width="48" height="48" rx="8" fill="#0e0e0e"/>
-  <text x="24" y="34" font-family="Helvetica Neue, sans-serif" font-size="28" font-weight="700" fill="#e0200f" text-anchor="middle">✦</text>
+  <defs>
+    <radialGradient id="g" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#b0c4ff" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#4a6ee8" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#0d0d2e" stop-opacity="0.98"/>
+    </radialGradient>
+    <radialGradient id="shine" cx="28%" cy="22%" r="45%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="rim" cx="50%" cy="50%" r="50%">
+      <stop offset="80%" stop-color="#6a8fff" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#8aaeff" stop-opacity="0.6"/>
+    </radialGradient>
+  </defs>
+  <circle cx="24" cy="24" r="22" fill="url(#g)"/>
+  <circle cx="24" cy="24" r="22" fill="url(#rim)"/>
+  <circle cx="24" cy="24" r="22" fill="none" stroke="#7fa0ff" stroke-width="1" stroke-opacity="0.5"/>
+  <circle cx="24" cy="24" r="22" fill="url(#shine)"/>
 </svg>
