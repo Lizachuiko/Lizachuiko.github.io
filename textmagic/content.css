@@ -1,6 +1,6 @@
 /* ─── tecs — injected styles ─── */
 
-/* ── Glass lens button ── */
+/* ── Glass bubble button ── */
 .tm-btn {
   position: absolute;
   z-index: 2147483647;
@@ -13,54 +13,70 @@
   pointer-events: all;
   user-select: none;
   transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
+  overflow: hidden;
 
-  /* glass effect */
-  background: radial-gradient(
-    circle at 35% 30%,
-    rgba(180, 210, 255, 0.85) 0%,
-    rgba(80, 120, 240, 0.6) 40%,
-    rgba(10, 10, 40, 0.85) 100%
-  );
+  /* fully transparent base — see through to page */
+  background: transparent;
+
+  /* glass rim */
   box-shadow:
-    0 0 0 1px rgba(120, 160, 255, 0.4),
-    0 0 12px rgba(80, 130, 255, 0.35),
-    inset 0 1px 0 rgba(255,255,255,0.5),
-    inset 0 -1px 0 rgba(40,60,180,0.3);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+    inset 0 0 0 1px rgba(255,255,255,0.45),
+    inset 0 1px 3px rgba(255,255,255,0.6),
+    0 2px 12px rgba(180,200,255,0.18),
+    0 1px 3px rgba(0,0,0,0.12);
+
+  backdrop-filter: blur(6px) saturate(1.4);
+  -webkit-backdrop-filter: blur(6px) saturate(1.4);
 }
 
-/* shine overlay via pseudo */
+/* top-left bright highlight */
 .tm-btn::before {
   content: '';
   position: absolute;
-  inset: 0;
+  top: 3px;
+  left: 5px;
+  width: 10px;
+  height: 6px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle at 30% 25%,
-    rgba(255,255,255,0.65) 0%,
-    rgba(255,255,255,0.1) 45%,
-    transparent 70%
-  );
+  background: rgba(255,255,255,0.75);
+  filter: blur(1.5px);
+  pointer-events: none;
+}
+
+/* bottom-right faint glow */
+.tm-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 7px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(180,210,255,0.35);
+  filter: blur(2px);
   pointer-events: none;
 }
 
 .tm-btn:hover {
-  transform: scale(1.15);
+  transform: scale(1.18);
   box-shadow:
-    0 0 0 1px rgba(140,180,255,0.6),
-    0 0 18px rgba(80,130,255,0.55),
-    inset 0 1px 0 rgba(255,255,255,0.6),
-    inset 0 -1px 0 rgba(40,60,180,0.4);
+    inset 0 0 0 1px rgba(255,255,255,0.6),
+    inset 0 1px 3px rgba(255,255,255,0.75),
+    0 2px 18px rgba(160,190,255,0.3),
+    0 1px 4px rgba(0,0,0,0.15);
 }
 
 .tm-btn.tm-loading {
-  animation: tm-pulse 1.2s ease-in-out infinite;
+  animation: tm-pulse 1.4s ease-in-out infinite;
 }
 
 @keyframes tm-pulse {
-  0%, 100% { box-shadow: 0 0 0 1px rgba(120,160,255,0.4), 0 0 12px rgba(80,130,255,0.35), inset 0 1px 0 rgba(255,255,255,0.5); }
-  50%       { box-shadow: 0 0 0 2px rgba(120,160,255,0.7), 0 0 24px rgba(80,130,255,0.7), inset 0 1px 0 rgba(255,255,255,0.6); }
+  0%, 100% {
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.45), 0 2px 12px rgba(180,200,255,0.18);
+  }
+  50% {
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.7), 0 2px 22px rgba(160,190,255,0.45);
+  }
 }
 
 /* ─── Panel ─── */

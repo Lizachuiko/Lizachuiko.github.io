@@ -96,7 +96,7 @@ function showBtn(el) {
 
   tmBtn = document.createElement('button');
   tmBtn.className = 'tm-btn';
-  tmBtn.innerHTML = '✦';
+  tmBtn.innerHTML = '';
   tmBtn.title = 'tecs AI';
 
   document.body.appendChild(tmBtn);
@@ -315,7 +315,7 @@ async function runRequest(panel, mode, instruction) {
 
   const submitBtns = panel.querySelectorAll('.tm-submit, .tm-quick-btn');
   submitBtns.forEach(b => b.disabled = true);
-  if (tmBtn) { tmBtn.innerHTML = '⏳'; }
+  if (tmBtn) { tmBtn.classList.add('tm-loading'); }
 
   const targetLang = panel.querySelector('#tm-lang-select')?.value;
 
@@ -325,7 +325,7 @@ async function runRequest(panel, mode, instruction) {
   });
 
   submitBtns.forEach(b => b.disabled = false);
-  if (tmBtn) tmBtn.innerHTML = '✦';
+  if (tmBtn) { tmBtn.classList.remove('tm-loading'); }
 
   if (error) {
     if (error === 'NO_API_KEY') {
