@@ -1,6 +1,7 @@
 // ─── TextMagic Background Service Worker ───
 
-const OPENAI_URL = 'https://api.openai.com/v1/chat/completions';
+const ANTHROPIC_URL = 'https://api.anthropic.com/v1/messages';
+const MODEL = 'claude-sonnet-4-6';
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === 'AI_REQUEST') {
@@ -11,8 +12,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   }
 });
 
-async function handleAIRequest({ mode, text, instruction, targetLang, userStyle }) {
-  const { apiKey } = await chrome.storage.sync.get('apiKey');
+async function handleAIRequest({ mode, text, instruction, targetLang }) {
+  const { apiKey, userStyle } = await chrome.storage.sync.get(['apiKey', 'userStyle']);
 
   if (!apiKey) {
     return { error: 'NO_API_KEY' };
@@ -21,30 +22,32 @@ async function handleAIRequest({ mode, text, instruction, targetLang, userStyle 
   const systemPrompt = buildSystemPrompt(mode, userStyle);
   const userMessage  = buildUserMessage(mode, text, instruction, targetLang);
 
-  const res = await fetch(OPENAI_URL, {
+  const res = await fetch(ANTHROPIC_URL, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`
+      'content-type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      // allow calling the API from a browser/extension context
+      'anthropic-dangerous-direct-browser-access': 'true'
     },
     body: JSON.stringify({
-      model: 'gpt-4o',
+      model: MODEL,
+      max_tokens: 2000,
+      system: systemPrompt,
       messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user',   content: userMessage  }
-      ],
-      temperature: 0.7,
-      max_tokens: 2000
+        { role: 'user', content: userMessage }
+      ]
     })
   });
 
   if (!res.ok) {
-    const err = await res.json();
+    const err = await res.json().catch(() => ({}));
     throw new Error(err.error?.message || `API error ${res.status}`);
   }
 
   const data = await res.json();
-  return { result: data.choices[0].message.content.trim() };
+  return { result: (data.content?.[0]?.text || '').trim() };
 }
 
 function buildSystemPrompt(mode, userStyle) {
@@ -62,20 +65,20 @@ function buildSystemPrompt(mode, userStyle) {
     case 'generate':
       return `You are a smart writing assistant. Generate text based on the user's instruction. Return ONLY the generated text — no explanations, no meta-commentary.${styleNote}`;
 
+    case 'polish':
+      return `You are a careful copy editor. Lightly format and edit the text for clarity, flow, and readability while preserving its meaning and the author's voice. Return ONLY the polished text — no explanations.${styleNote}`;
+
     case 'fix':
-      return `You are a grammar and clarity editor. Fix grammar, spelling, and awkward phrasing. Return ONLY the corrected text — no explanations.${styleNote}`;
+      return `You are a grammar editor. Fix ONLY grammar, spelling, and punctuation. Do not change wording, tone, or style beyond what's needed for correctness. Return ONLY the corrected text — no explanations.${styleNote}`;
 
     case 'formal':
-      return `Make the text more formal and professional. Return ONLY the rewritten text.${styleNote}`;
+      return `Make the text more formal and professional while keeping its meaning. Return ONLY the rewritten text.${styleNote}`;
 
-    case 'casual':
-      return `Make the text more casual, friendly, and conversational. Return ONLY the rewritten text.${styleNote}`;
+    case 'rewrite':
+      return `Rewrite the text so it expresses the same meaning in a clearly different way (different wording and sentence structure). Return ONLY the rewritten text.${styleNote}`;
 
-    case 'shorter':
-      return `Make the text more concise without losing key meaning. Return ONLY the shortened text.${styleNote}`;
-
-    case 'longer':
-      return `Expand the text with more detail and depth. Return ONLY the expanded text.${styleNote}`;
+    case 'structure':
+      return `Restructure the text into a clear, well-organized form — logical paragraphs, and bullet points or numbered lists where they help. Keep all the information. Return ONLY the structured text.${styleNote}`;
 
     default:
       return `You are a helpful writing assistant. Return ONLY the processed text.${styleNote}`;

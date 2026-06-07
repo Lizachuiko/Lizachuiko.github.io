@@ -29,8 +29,8 @@ saveBtn.addEventListener('click', () => {
     return;
   }
 
-  if (!apiKey.startsWith('sk-')) {
-    showStatus('⚠ Key should start with sk-', true);
+  if (!apiKey.startsWith('sk-ant-')) {
+    showStatus('⚠ Claude key should start with sk-ant-', true);
     return;
   }
 

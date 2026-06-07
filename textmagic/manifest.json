@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "tecs — AI in every input",
+  "name": "Pearl — AI in every input",
   "version": "0.1.0",
   "description": "Edit, translate, and generate text in any input field using AI",
   "permissions": [
@@ -24,9 +24,9 @@
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "icons/icon16.svg",
-      "48": "icons/icon48.svg",
-      "128": "icons/icon128.svg"
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
     }
   },
   "icons": {
