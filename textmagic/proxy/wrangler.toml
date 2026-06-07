@@ -1,0 +1,14 @@
+name = "pearl-proxy"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+# Native per-IP rate limiter. 30 requests / 60s per key (IP).
+# Tune limit/period to taste; no KV namespace or external service needed.
+[[unsafe.bindings]]
+name = "RATE_LIMITER"
+type = "ratelimit"
+namespace_id = "1001"
+simple = { limit = 30, period = 60 }
+
+# ANTHROPIC_API_KEY is NOT set here — it's a secret.
+# Add it with:  npx wrangler secret put ANTHROPIC_API_KEY

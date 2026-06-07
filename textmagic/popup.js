@@ -1,42 +1,19 @@
-// ─── TextMagic Popup ───
+// ─── Pearl Popup ───
+// No API key here — that lives on the proxy. Only the writing-style preference.
 
-const apiKeyInput  = document.getElementById('api-key');
 const userStyleInput = document.getElementById('user-style');
-const saveBtn      = document.getElementById('save');
-const statusEl     = document.getElementById('status');
-const keyDot       = document.getElementById('key-dot');
-const keyLabel     = document.getElementById('key-label');
+const saveBtn        = document.getElementById('save');
+const statusEl       = document.getElementById('status');
 
-// Load saved values
-chrome.storage.sync.get(['apiKey', 'userStyle'], ({ apiKey, userStyle }) => {
-  if (apiKey) {
-    apiKeyInput.value = apiKey;
-    keyDot.classList.add('active');
-    keyLabel.textContent = 'Key saved ✓';
-  }
-  if (userStyle) {
-    userStyleInput.value = userStyle;
-  }
+// Load saved value
+chrome.storage.sync.get(['userStyle'], ({ userStyle }) => {
+  if (userStyle) userStyleInput.value = userStyle;
 });
 
 // Save
 saveBtn.addEventListener('click', () => {
-  const apiKey    = apiKeyInput.value.trim();
   const userStyle = userStyleInput.value.trim();
-
-  if (!apiKey) {
-    showStatus('⚠ Please enter your API key', true);
-    return;
-  }
-
-  if (!apiKey.startsWith('sk-ant-')) {
-    showStatus('⚠ Claude key should start with sk-ant-', true);
-    return;
-  }
-
-  chrome.storage.sync.set({ apiKey, userStyle }, () => {
-    keyDot.classList.add('active');
-    keyLabel.textContent = 'Key saved ✓';
+  chrome.storage.sync.set({ userStyle }, () => {
     showStatus('Saved!');
   });
 });

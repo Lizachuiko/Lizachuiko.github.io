@@ -1,2 +1,9 @@
 .DS_Store
 **/.DS_Store
+
+# extension proxy build artefacts
+textmagic/proxy/.wrangler/
+textmagic/proxy/.dev.vars
+textmagic/proxy/node_modules/
+**/node_modules/
+*.log
