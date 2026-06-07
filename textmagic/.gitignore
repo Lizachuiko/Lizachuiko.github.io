@@ -1,6 +1,0 @@
-.DS_Store
-node_modules/
-proxy/node_modules/
-proxy/.dev.vars
-proxy/.wrangler/
-*.log
