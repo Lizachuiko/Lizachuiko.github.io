@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pearl — Privacy Policy</title>
+  <style>
+    body { max-width: 720px; margin: 48px auto; padding: 0 20px;
+      font-family: -apple-system, system-ui, "Segoe UI", sans-serif;
+      color: #2a2535; line-height: 1.6; }
+    h1 { font-size: 26px; }
+    h2 { font-size: 18px; margin-top: 32px; }
+    a { color: #8a5fd0; }
+    .muted { color: #777; font-size: 14px; }
+    code { background: #f3f0f8; padding: 1px 5px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>Privacy Policy — Pearl</h1>
+  <p class="muted">Last updated: 7 June 2026</p>
+
+  <p>Pearl is a Chrome extension that helps you edit, translate, and generate
+  text inside input fields on the web using AI. This policy explains what data
+  the extension handles and how.</p>
+
+  <h2>What data is processed</h2>
+  <ul>
+    <li><strong>Text you choose to process.</strong> When you click an action
+    (Edit, Translate, Generate, etc.), the text in the focused field — or the
+    text you selected — is sent for processing so the AI can return a result.</li>
+    <li><strong>Your writing-style note</strong> (optional). If you fill in the
+    "Writing Style" field in the extension settings, that short note is sent
+    along with your requests to guide the output.</li>
+  </ul>
+
+  <h2>What is NOT collected</h2>
+  <ul>
+    <li>Pearl does <strong>not</strong> read or send any text unless you
+    explicitly trigger an action.</li>
+    <li>Pearl does <strong>not</strong> collect your browsing history, passwords,
+    cookies, or personal identifiers.</li>
+    <li>Pearl does <strong>not</strong> show ads or sell data to third parties.</li>
+  </ul>
+
+  <h2>How requests are handled</h2>
+  <p>Requests are sent over HTTPS to our own proxy server hosted on Cloudflare
+  Workers. The proxy forwards the text to the AI provider
+  (<a href="https://www.anthropic.com/" target="_blank">Anthropic, Claude API</a>)
+  to generate a response, then returns the result to the extension. The text is
+  used only to produce your result and is <strong>not stored</strong> by Pearl
+  after the request completes.</p>
+
+  <h2>Third-party processing</h2>
+  <p>Text you submit is processed by Anthropic to generate responses, subject to
+  Anthropic's privacy and usage policies. See
+  <a href="https://www.anthropic.com/legal/privacy" target="_blank">Anthropic's Privacy Policy</a>.</p>
+
+  <h2>Local storage</h2>
+  <p>Your optional writing-style note is stored using Chrome's
+  <code>storage.sync</code> so it persists across your signed-in browsers. You
+  can clear it any time from the extension settings.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about this policy? Email
+  <a href="mailto:vanpelz8@gmail.com">vanpelz8@gmail.com</a>.</p>
+</body>
+</html>
