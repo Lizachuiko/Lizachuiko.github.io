@@ -1,1057 +1,826 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Liza Chuiko — Product Designer & Builder</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #000000;
-      --fg: #ffffff;
-      --accent: #ffffff;
-      --red: #ffffff;
-      --gray: rgba(255,255,255,0.4);
-      --mid: rgba(255,255,255,0.6);
-      --border: rgba(255,255,255,0.1);
-      --mono: 'Courier New', Courier, monospace;
-      --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    }
-
-  <style>
-    html { font-size: 16px; scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--fg); font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-    a { color: inherit; text-decoration: none; }
-
-    /* ─── HEADER ─── */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 22px 48px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .logo {
-      font-size: 13px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: var(--fg);
-    }
-    .logo span { color: var(--fg); opacity: 0.5; }
-
-    nav {
-      display: flex;
-      gap: 36px;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-    nav a { color: var(--gray); transition: color 0.2s; }
-    nav a:hover { color: var(--fg); }
-
-    .nav-badge {
-      display: inline-block;
-      background: var(--fg);
-      color: var(--bg);
-      font-size: 8px;
-      padding: 1px 5px;
-      border-radius: 2px;
-      vertical-align: middle;
-      margin-left: 4px;
-      letter-spacing: 0.05em;
-    }
-
-    /* ─── TICKER ─── */
-    .ticker {
-      overflow: hidden;
-      border-bottom: 1px solid var(--border);
-      padding: 11px 0;
-      white-space: nowrap;
-      background: var(--bg);
-    }
-
-    .ticker-track {
-      display: inline-flex;
-      animation: ticker 32s linear infinite;
-    }
-    .ticker-track:hover { animation-play-state: paused; }
-
-    @keyframes ticker {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    .ticker-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 0 36px;
-      font-size: 11px;
-      font-family: var(--mono);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gray);
-    }
-
-    .ticker-item em { font-style: normal; color: var(--fg); }
-
-    .ticker-dot {
-      width: 3px; height: 3px;
-      border-radius: 50%;
-      background: var(--gray);
-      flex-shrink: 0;
-    }
-
-    /* ─── HERO ─── */
-    .hero {
-      padding: 100px 48px 80px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 60px;
-      align-items: end;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .hero-title {
-      font-size: clamp(64px, 11vw, 160px);
-      font-weight: 800;
-      text-transform: uppercase;
-      line-height: 0.88;
-      letter-spacing: -0.04em;
-      color: var(--fg);
-    }
-    .hero-title em { font-style: normal; color: var(--fg); opacity: 0.35; }
-
-    .hero-sub {
-      margin-top: 36px;
-      font-size: 16px;
-      line-height: 1.7;
-      color: var(--mid);
-      max-width: 500px;
-    }
-    .hero-sub strong { color: var(--fg); font-weight: 600; }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 28px;
-    }
-
-    .tag {
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      border: 1px solid var(--border);
-      padding: 5px 12px;
-      font-family: var(--mono);
-      color: var(--gray);
-      border-radius: 2px;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .tag:hover { border-color: var(--fg); color: var(--fg); }
-    .tag.red { border-color: rgba(255,255,255,0.3); color: var(--fg); }
-
-    .hero-right { text-align: right; }
-
-    .status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-family: var(--mono);
-      color: var(--fg);
-      border: 1px solid var(--border);
-      padding: 8px 16px;
-      margin-bottom: 28px;
-      border-radius: 100px;
-    }
-
-    .status-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #4ade80;
-      animation: pulse 2.5s infinite;
-      box-shadow: 0 0 6px rgba(74,222,128,0.6);
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0.3; }
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      align-items: flex-end;
-    }
-
-    .hero-meta-item { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
-    .hero-meta-label {
-      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--gray); font-family: var(--mono);
-    }
-    .hero-meta-value { font-size: 14px; font-weight: 500; }
-
-    /* ─── VIBE CODING ─── */
-    .vibe-section { border-bottom: 1px solid var(--border); }
-
-    .vibe-header {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .vibe-header-left {
-      padding: 64px 48px 56px;
-      border-right: 1px solid var(--border);
-    }
-
-    .vibe-header-right {
-      padding: 64px 48px 56px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .vibe-eyebrow {
-      font-size: 9px;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gray);
-      font-family: var(--mono);
-      margin-bottom: 20px;
-    }
-
-    .vibe-title {
-      font-size: clamp(40px, 5.5vw, 80px);
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: -0.035em;
-      line-height: 0.9;
-    }
-    .vibe-title em { font-style: normal; opacity: 0.35; }
-
-    .vibe-desc {
-      font-size: 14px;
-      line-height: 1.8;
-      color: var(--mid);
-      max-width: 420px;
-      margin-top: 24px;
-    }
-    .vibe-desc strong { color: var(--fg); }
-
-    .stack-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 28px;
-    }
-
-    .stack-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 10px;
-      letter-spacing: 0.08em;
-      font-family: var(--mono);
-      padding: 5px 11px;
-      border: 1px solid var(--border);
-      color: var(--gray);
-      border-radius: 2px;
-      transition: all 0.15s;
-      cursor: default;
-    }
-    .stack-pill:hover { border-color: var(--fg); color: var(--fg); }
-    .stack-pill .pill-dot { display: none; }
-
-    .approach-list { display: flex; flex-direction: column; }
-
-    .approach-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 18px;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .approach-item:last-child { border-bottom: none; }
-
-    .approach-num {
-      font-size: 10px;
-      font-family: var(--mono);
-      color: var(--gray);
-      letter-spacing: 0.1em;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .approach-text strong {
-      display: block;
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 4px;
-    }
-
-    .approach-text span {
-      font-size: 11px;
-      color: var(--gray);
-      line-height: 1.55;
-    }
-
-    .vibe-github-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 32px;
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-family: var(--mono);
-      border: 1px solid var(--fg);
-      padding: 12px 20px;
-      border-radius: 2px;
-      transition: background 0.2s, color 0.2s;
-    }
-    .vibe-github-link:hover { background: var(--fg); color: var(--bg); }
-
-    /* ─── BLOG FEED ─── */
-    .blog-feed {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    .blog-card {
-      padding: 32px;
-      border-right: 1px solid var(--border);
-      display: block;
-      position: relative;
-      transition: background 0.2s;
-    }
-    .blog-card:last-child { border-right: none; }
-    .blog-card:hover { background: rgba(255,255,255,0.04); }
-    .blog-card:hover .blog-title { opacity: 1; }
-
-    .blog-date {
-      font-size: 9px;
-      font-family: var(--mono);
-      letter-spacing: 0.15em;
-      color: var(--gray);
-      margin-bottom: 10px;
-    }
-
-    .blog-tag {
-      display: inline-block;
-      font-size: 9px;
-      font-family: var(--mono);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border: 1px solid var(--border);
-      color: var(--gray);
-      padding: 2px 7px;
-      margin-bottom: 16px;
-      border-radius: 2px;
-    }
-
-    .blog-title {
-      font-size: 17px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      margin-bottom: 10px;
-      opacity: 0.85;
-      transition: opacity 0.2s;
-    }
-
-    .blog-desc {
-      font-size: 11px;
-      color: var(--gray);
-      line-height: 1.65;
-      padding-bottom: 32px;
-    }
-
-    .blog-arrow {
-      position: absolute;
-      bottom: 28px;
-      right: 28px;
-      font-size: 16px;
-      color: var(--gray);
-    }
-
-    /* ─── SECTION HEADER ─── */
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: 20px 48px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .section-label {
-      font-size: 9px;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gray);
-      font-family: var(--mono);
-    }
-
-    .section-note {
-      font-size: 9px;
-      color: var(--gray);
-      font-family: var(--mono);
-      letter-spacing: 0.08em;
-    }
-
-    /* ─── PROJECTS GRID ─── */
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .project-card {
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      display: block;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
-    .project-card:nth-child(2n) { border-right: none; }
-    .project-card:nth-last-child(-n+2) { border-bottom: none; }
-
-    .project-thumb {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .project-thumb img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-      filter: grayscale(20%) brightness(0.85);
-      transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s;
-    }
-    .project-card:hover .project-thumb img { transform: scale(1.04); filter: grayscale(0%) brightness(1); }
-
-    .project-thumb-placeholder {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
-      color: rgba(255,255,255,0.1);
-      text-transform: uppercase;
-    }
-
-    .thumb-ozon      { background: #0c1118; }
-    .thumb-tribune   { background: #080f18; }
-    .thumb-sber      { background: #080f08; }
-    .thumb-postomates{ background: #120808; }
-
-    .project-number {
-      position: absolute; top: 18px; left: 20px;
-      font-size: 10px; font-family: var(--mono);
-      color: rgba(255,255,255,0.2); letter-spacing: 0.1em;
-    }
-
-    .project-info {
-      padding: 24px 28px 28px;
-      border-top: 1px solid var(--border);
-      background: var(--bg);
-      position: relative;
-    }
-
-    .project-meta-row {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;
-    }
-
-    .project-tags { display: flex; gap: 5px; flex-wrap: wrap; }
-
-    .project-tag {
-      font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--gray); font-family: var(--mono);
-      border: 1px solid var(--border); padding: 2px 7px;
-      border-radius: 2px;
-    }
-
-    .project-year { font-size: 10px; color: var(--gray); font-family: var(--mono); letter-spacing: 0.08em; }
-
-    .project-name {
-      font-size: clamp(18px, 2vw, 26px);
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      line-height: 1;
-      margin-bottom: 10px;
-      transition: opacity 0.2s;
-    }
-    .project-card:hover .project-name { opacity: 0.7; }
-
-    .project-desc { font-size: 12px; color: var(--gray); line-height: 1.65; }
-
-    .project-metrics {
-      display: flex; gap: 28px; margin-top: 16px; padding-top: 16px;
-      border-top: 1px solid var(--border); flex-wrap: wrap;
-    }
-
-    .metric { display: flex; flex-direction: column; gap: 3px; }
-
-    .metric-value {
-      font-size: 22px; font-weight: 800; letter-spacing: -0.03em;
-    }
-
-    .metric-label {
-      font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--gray); font-family: var(--mono);
-    }
-
-    .project-arrow {
-      position: absolute; top: 24px; right: 24px;
-      width: 32px; height: 32px;
-      border: 1px solid var(--border); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; font-size: 13px;
-      color: var(--gray);
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
-    }
-    .project-card:hover .project-arrow { background: var(--fg); border-color: var(--fg); color: var(--bg); }
-
-    /* ─── ABOUT ─── */
-    .about {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .about-text {
-      padding: 72px 48px;
-      border-right: 1px solid var(--border);
-    }
-
-    .about-text h2 {
-      font-size: clamp(44px, 6vw, 88px);
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: -0.035em;
-      line-height: 0.9;
-      margin-bottom: 32px;
-    }
-    .about-text h2 em { font-style: normal; opacity: 0.35; }
-
-    .about-text p {
-      font-size: 14px; line-height: 1.85; color: var(--mid);
-      margin-bottom: 16px; max-width: 460px;
-    }
-    .about-text p strong { color: var(--fg); font-weight: 600; }
-
-    .visa-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      border: 1px solid var(--border); padding: 8px 14px;
-      font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
-      font-family: var(--mono); margin-top: 20px; border-radius: 2px;
-    }
-
-    .about-right { padding: 72px 48px; }
-
-    .exp-group-title {
-      font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--gray); font-family: var(--mono); margin-bottom: 20px;
-      padding-bottom: 10px; border-bottom: 1px solid var(--border);
-    }
-
-    .exp-item {
-      display: grid; grid-template-columns: 1fr auto; gap: 8px;
-      padding: 16px 0; border-bottom: 1px solid var(--border);
-    }
-    .exp-item:last-child { border-bottom: none; }
-
-    .exp-company {
-      font-size: 15px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: -0.01em;
-    }
-    .exp-role  { font-size: 11px; color: var(--gray); margin-top: 3px; }
-    .exp-period { font-size: 10px; font-family: var(--mono); color: var(--gray); text-align: right; white-space: nowrap; }
-    .exp-type  { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; font-family: var(--mono); color: var(--gray); margin-top: 3px; opacity: 0.6; }
-
-    /* ─── FOOTER ─── */
-    footer {
-      display: grid; grid-template-columns: 1fr auto;
-      gap: 40px; align-items: end; padding: 80px 48px 60px;
-    }
-
-    .footer-cta-label {
-      font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--gray); font-family: var(--mono); margin-bottom: 20px;
-    }
-
-    .footer-cta {
-      font-size: clamp(36px, 6vw, 88px); font-weight: 800;
-      text-transform: uppercase; letter-spacing: -0.035em; line-height: 0.92;
-    }
-
-    .footer-cta a {
-      color: var(--fg);
-      border-bottom: 2px solid rgba(255,255,255,0.3);
-      padding-bottom: 3px;
-      transition: border-color 0.2s;
-    }
-    .footer-cta a:hover { border-color: var(--fg); }
-
-    .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
-    .footer-links { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
-    .footer-links a {
-      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--gray); font-family: var(--mono); transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--fg); }
-    .footer-copy { font-size: 9px; color: var(--border); font-family: var(--mono); margin-top: 6px; }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 768px) {
-      header { padding: 18px 20px; }
-      nav { gap: 20px; }
-      .hero { grid-template-columns: 1fr; padding: 60px 24px 48px; }
-      .hero-right { text-align: left; }
-      .hero-meta { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 20px; }
-      .hero-meta-item { align-items: flex-start; }
-      .section-header { padding: 16px 24px; }
-      .vibe-header { grid-template-columns: 1fr; }
-      .vibe-header-left { border-right: none; border-bottom: 1px solid var(--border); padding: 40px 24px; }
-      .vibe-header-right { padding: 40px 24px; }
-      .blog-feed { grid-template-columns: 1fr; }
-      .blog-card { border-right: none; border-bottom: 1px solid var(--border); }
-      .projects { grid-template-columns: 1fr; }
-      .project-card:nth-child(2n) { border-right: none; }
-      .project-info { padding: 20px 24px 24px; }
-      .about { grid-template-columns: 1fr; }
-      .about-text { border-right: none; border-bottom: 1px solid var(--border); padding: 48px 24px; }
-      .about-right { padding: 48px 24px; }
-      footer { grid-template-columns: 1fr; padding: 48px 24px; }
-      .footer-right { align-items: flex-start; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Liza Chuiko Portfolio</title>
+<meta name="description" content="Liza Chuiko, product designer and builder in London. AI products for B2B teams, designed and shipped in code.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&display=swap">
+<style>
+  /* Layout: one inset slab of liquid glass holds the portrait and the name;
+     below it the work is a ledger of wide rows whose type stretches the way the face does. */
+  :root {
+    --paper: #EFEDEB;
+    --ink: #15163A;
+    --mute: #66627F;
+    --line: #D5D1CE;
+    --signal: #3B2BFF;
+    --on-glass: #FFFFFF;
+    --glass-tint: rgba(21, 22, 58, 0.30);
+    --glass-edge: rgba(255, 255, 255, 0.38);
+    --plate: #15163A;
+    --plate-alpha: 0.36;
+
+    --display: "Roboto Flex", "Arial Black", "Helvetica Neue", Arial, sans-serif;
+    --text: "Newsreader", "Iowan Old Style", Georgia, serif;
+
+    --gutter: clamp(16px, 1.8vw, 28px);
+    --pad-l: max(var(--gutter), env(safe-area-inset-left, 0px));
+    --pad-r: max(var(--gutter), env(safe-area-inset-right, 0px));
+    --step-0: 15px;
+    --step-1: 18px;
+    --step-2: clamp(20px, 1.7vw, 25px);
+    color-scheme: light;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--text);
+    font-size: var(--step-1);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 4px; }
+  .hero :focus-visible { outline-color: var(--on-glass); }
+
+  .wrap {
+    padding-left: var(--pad-l);
+    padding-right: var(--pad-r);
+  }
+
+  /* ───── Hero: the glass slab ───── */
+  .hero-wrap { position: relative; padding-block: var(--gutter); }
+  .hero {
+    position: relative;
+    height: min(calc(100svh - 2 * var(--gutter)), 105vw);
+    min-height: min(540px, 105vw);
+    border-radius: clamp(20px, 2.4vw, 36px);
+    overflow: hidden;
+    background: #CFC8C1;
+    color: var(--on-glass);
+    isolation: isolate;
+  }
+  .hero__glass, .hero__still {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    display: block;
+    z-index: -1;
+  }
+  .hero__still { object-fit: cover; }
+  .hero__top {
+    position: absolute; inset: 0 0 auto 0;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 8px;
+    padding: clamp(14px, 1.6vw, 24px);
+  }
+  .hero__nav { display: flex; gap: 6px; }
+  .chip {
+    display: inline-block;
+    margin: 0;
+    padding: 0.5em 0.95em 0.52em;
+    border-radius: 999px;
+    border: 1px solid var(--glass-edge);
+    background: var(--glass-tint);
+    -webkit-backdrop-filter: blur(14px) saturate(1.3);
+    backdrop-filter: blur(14px) saturate(1.3);
+    color: var(--on-glass);
+    font-family: var(--display);
+    font-size: var(--step-0);
+    font-variation-settings: "wdth" 104, "wght" 480;
+    line-height: 1.2;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+  a.chip:hover { background: rgba(21, 22, 58, 0.55); }
+
+  .hero__foot {
+    position: absolute;
+    inset: var(--gutter) var(--pad-r) var(--gutter) var(--pad-l);
+    padding: clamp(64px, 6vw, 96px) clamp(14px, 1.6vw, 24px) clamp(28px, 4vw, 64px);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: clamp(16px, 1.9vw, 30px);
+    text-align: center;
+    translate: 0 8%;                 /* sit on the nose, below the eyes */
+    color: var(--on-glass);
+    pointer-events: none;
+  }
+  .hero__intro {
+    margin: 0;
+    max-width: 21em;
+    font-size: var(--step-2);
+    line-height: 1.32;
+    text-wrap: balance;
+    text-shadow: 0 1px 16px rgba(21, 22, 58, 0.5), 0 0 3px rgba(21, 22, 58, 0.3);
+  }
+  .hero__name {
+    position: relative; isolation: isolate;
+    margin: 0;
+    display: grid; justify-items: center;
+    white-space: nowrap;
+    font-family: var(--display);
+    font-size: 6vw;
+    font-weight: 800;
+    font-variation-settings: "wdth" 151, "wght" 820, "opsz" 144;
+    letter-spacing: -0.025em;
+    line-height: 0.88;
+  }
+  .hero__name span { display: block; }
+  /* the plate: the same two words, swollen into one soft shape behind the name */
+  .hero__name .hero__plate {
+    position: absolute; inset: 0; z-index: -1;
+    display: grid; justify-items: center;
+    color: var(--plate);
+    opacity: var(--plate-alpha);
+    filter: url(#plate-goo);
+  }
+  .glass-on .hero__plate { display: none; }
+  .glass-on .hero__name { text-shadow: 0 1px 14px rgba(21, 22, 58, 0.30); }
+  .glass-on .hero__intro { margin-top: 0.55em; }       /* clear of the plate's lower edge */
+  .hero__note { position: absolute; right: clamp(14px, 1.6vw, 24px); top: clamp(64px, 6vw, 84px); max-width: 14em; }
+  @media (max-width: 760px) { .hero__note { top: 112px; right: auto; left: clamp(14px, 1.6vw, 24px); } }
+
+  /* ───── Work ledger ───── */
+  .section { padding-block: clamp(56px, 8vw, 128px) 0; }
+  .section__head {
+    display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 12px clamp(16px, 3vw, 48px);
+    align-items: baseline;
+    padding-bottom: clamp(20px, 2.4vw, 36px);
+  }
+  h2 {
+    margin: 0;
+    font-family: var(--display);
+    font-size: var(--step-2);
+    font-variation-settings: "wdth" 130, "wght" 700;
+    letter-spacing: -0.005em;
+  }
+  .section__head p { margin: 0; color: var(--mute); max-width: 34em; text-wrap: pretty; }
+
+  .ledger { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .job {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr);
+    gap: 10px clamp(16px, 3vw, 48px);
+    align-items: start;
+    padding-block: clamp(20px, 2.6vw, 38px);
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+  }
+  .job__name {
+    font-family: var(--display);
+    font-size: clamp(40px, 5.6vw, 88px);
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    font-variation-settings: "wdth" 38, "wght" 640, "opsz" 144;
+    transition: font-variation-settings 0.6s cubic-bezier(0.2, 0.9, 0.25, 1.12), color 0.25s;
+    white-space: nowrap;
+  }
+  .job:hover .job__name,
+  .job:focus-visible .job__name {
+    font-variation-settings: "wdth" 112, "wght" 780, "opsz" 144;
+    color: var(--signal);
+  }
+  .job__what { min-width: 0; padding-top: 0.35em; }
+  .job__what p { margin: 0; text-wrap: pretty; max-width: 30em; }
+  .job__meta { color: var(--mute); font-size: var(--step-0); margin-top: 0.5em !important; }
+  .job__fig { min-width: 0; text-align: right; padding-top: 0.2em; }
+  .job__num {
+    display: block;
+    font-family: var(--display);
+    font-size: clamp(26px, 3.2vw, 50px);
+    line-height: 1;
+    font-variation-settings: "wdth" 110, "wght" 520, "opsz" 144;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .job__label { display: block; margin-top: 0.4em; color: var(--mute); font-size: var(--step-0); font-style: italic; }
+
+  /* ───── About ───── */
+  .about {
+    display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 40px clamp(24px, 5vw, 96px);
+    align-items: start;
+  }
+  .about__text p { margin: 0 0 0.9em; font-size: var(--step-2); line-height: 1.42; max-width: 31em; text-wrap: pretty; }
+  .cv { margin: 0; border-top: 1px solid var(--line); }
+  .cv div {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 16px;
+    padding-block: 12px; border-bottom: 1px solid var(--line);
+  }
+  .cv dt { font-family: var(--display); font-variation-settings: "wdth" 112, "wght" 640; font-size: var(--step-1); grid-column: 1; }
+  .cv dd { margin: 0; color: var(--mute); font-size: var(--step-0); }
+  .cv dd.years { grid-column: 2; grid-row: 1; font-variant-numeric: tabular-nums; align-self: center; }
+  .cv dd.role { grid-column: 1 / -1; }
+
+  /* ───── Contact ───── */
+  .contact { padding-bottom: clamp(32px, 4vw, 56px); }
+  .contact__mail {
+    display: block;
+    margin: 0;
+    font-family: var(--display);
+    font-size: clamp(30px, 7.4vw, 124px);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    font-variation-settings: "wdth" 36, "wght" 640, "opsz" 144;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    transition: font-variation-settings 0.6s cubic-bezier(0.2, 0.9, 0.25, 1.12), color 0.25s;
+  }
+  a.contact__mail:hover { font-variation-settings: "wdth" 52, "wght" 760, "opsz" 144; color: var(--signal); }
+  .contact__row {
+    display: flex; flex-wrap: wrap; gap: 10px 28px; align-items: center;
+    margin-top: clamp(20px, 2.4vw, 32px);
+  }
+  .contact__row a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+  .contact__row a:hover { color: var(--signal); }
+  .copy {
+    font: inherit; font-family: var(--display); font-size: var(--step-0);
+    font-variation-settings: "wdth" 104, "wght" 520;
+    color: var(--paper); background: var(--ink);
+    border: 0; border-radius: 999px; padding: 0.55em 1.1em 0.57em; cursor: pointer;
+  }
+  .copy:hover { background: var(--signal); }
+  .foot {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px;
+    margin-top: clamp(48px, 7vw, 104px);
+    padding-top: 16px; border-top: 1px solid var(--line);
+    color: var(--mute); font-size: var(--step-0);
+  }
+
+  @media (max-width: 760px) {
+    .hero { height: auto; min-height: 0; aspect-ratio: 4 / 5; max-height: calc(100svh - 2 * var(--gutter)); }
+    .hero__foot { padding-top: 104px; padding-bottom: 20px; gap: 14px; translate: 0 6%; }
+    .hero__intro { max-width: 17em; font-size: 17px; line-height: 1.3; }
+    .section__head, .about { grid-template-columns: minmax(0, 1fr); }
+    .job { grid-template-columns: minmax(0, 1fr); }
+    .job__name { font-size: clamp(44px, 15vw, 76px); }
+    .job:hover .job__name, .job:focus-visible .job__name { font-variation-settings: "wdth" 70, "wght" 760, "opsz" 144; }
+    .job__fig { text-align: left; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+    .job__label { margin-top: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .job__name, .contact__mail { transition: none; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="logo">Liza <span>Chuiko</span></div>
-    <nav>
-      <a href="#work">Work</a>
-      <a href="#vibe">Vibe <span class="nav-badge">code</span></a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="plate-goo" x="-30%" y="-45%" width="160%" height="190%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="16"/>
+      <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 30 -3"/>
+    </filter>
+  </defs>
+</svg>
+
+<div class="wrap hero-wrap">
+  <header class="hero" id="top" data-photo="liza.jpg" data-focus="0.5 0.57" data-zoom="1.45" data-keep="0.46">
+    <canvas class="hero__glass" aria-hidden="true"></canvas>
+
+    <div class="hero__top">
+      <p class="chip">Product designer and builder, London</p>
+      <nav class="hero__nav" aria-label="Sections">
+        <a class="chip" href="#work">Work</a>
+        <a class="chip" href="#about">About</a>
+        <a class="chip" href="#contact">Contact</a>
+      </nav>
+    </div>
+
+    <p class="chip hero__note" hidden>Placeholder portrait. Your photo goes here.</p>
   </header>
 
-  <!-- TICKER -->
-  <div class="ticker">
-    <div class="ticker-track">
-      <span class="ticker-item"><span class="ticker-dot"></span>Claude <em>Sonnet 4.6</em></span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Cursor IDE</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>MCP <em>Prototyping</em></span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Vibe Coding</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>GitHub Pages</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Figma <em>→</em> Code</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>HTML / CSS / JS</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Building in <em>Public</em></span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Design <em>×</em> Engineering</span>
-      <!-- duplicate for seamless loop -->
-      <span class="ticker-item"><span class="ticker-dot"></span>Claude <em>Sonnet 4.6</em></span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Cursor IDE</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>MCP <em>Prototyping</em></span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Vibe Coding</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>GitHub Pages</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Figma <em>→</em> Code</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>HTML / CSS / JS</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Building in <em>Public</em></span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Design <em>×</em> Engineering</span>
-    </div>
+  <div class="hero__foot">
+    <h1 class="hero__name"><span class="hero__plate" aria-hidden="true"><span>Liza</span><span>Chuiko</span></span><span>Liza</span><span>Chuiko</span></h1>
+    <p class="hero__intro">I design AI products for B2B teams and ship them in code. Founding designer at ClaimSorted, then design and front end at Tellis.</p>
   </div>
+</div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-left">
-      <h1 class="hero-title">Product<br>Designer<br><em>&amp; Builder</em></h1>
-      <p class="hero-sub">
-        I design <strong>AI-powered B2B products</strong> from zero to scale — interfaces, systems, workflows, internal tools. Now building my own stuff in code and shipping it to the web.
-      </p>
-      <div class="hero-tags">
-        <span class="tag">B2B &amp; SaaS</span>
-        <span class="tag">AI Products</span>
-        <span class="tag">Design Systems</span>
-        <span class="tag">Figma → Code</span>
-        <span class="tag red">100+ mentees</span>
-      </div>
+<main class="wrap">
+  <section class="section" id="work" aria-labelledby="work-h">
+    <div class="section__head">
+      <h2 id="work-h">Work</h2>
+      <p>ClaimSorted and Tellis are private products, so there is no public case study. I walk through both on a call.</p>
     </div>
-    <div class="hero-right">
-      <div class="status-pill">
-        <span class="status-dot"></span>
-        Open to work
+
+    <ul class="ledger">
+      <li><a class="job" href="https://tellis.ai/" target="_blank" rel="noopener">
+        <span class="job__name">Tellis</span>
+        <span class="job__what">
+          <p>AI agents that keep ecommerce catalogues in order. I designed the first product version and built its front end myself, with Claude Code and other AI tools.</p>
+          <p class="job__meta">Product designer and builder, contract. 2026. tellis.ai</p>
+        </span>
+        <span class="job__fig"><span class="job__num">0 → 1</span><span class="job__label">first product version</span></span>
+      </a></li>
+
+      <li><a class="job" href="https://claimsorted.com/" target="_blank" rel="noopener">
+        <span class="job__name">ClaimSorted</span>
+        <span class="job__what">
+          <p>AI that resolves insurance claims end to end. Operators ignored confidence scores and trusted answers anchored to the source document, so the review screen was rebuilt around the source.</p>
+          <p class="job__meta">Founding product designer. 2025 to 2026. claimsorted.com</p>
+        </span>
+        <span class="job__fig"><span class="job__num">End to end</span><span class="job__label">claims resolved by AI</span></span>
+      </a></li>
+
+      <li><a class="job" href="https://chromewebstore.google.com/detail/bennnfghbaeajmjgnlncboleealmkgfk" target="_blank" rel="noopener">
+        <span class="job__name">Pearl</span>
+        <span class="job__what">
+          <p>My own Chrome extension. It puts an AI editor in every text field on the web: fix, rewrite, translate or draft without leaving the page.</p>
+          <p class="job__meta">Designed and built solo. 2026.</p>
+        </span>
+        <span class="job__fig"><span class="job__num">Live</span><span class="job__label">in Chrome Web Store</span></span>
+      </a></li>
+
+      <li><a class="job" href="https://liza-chuiko-design.webflow.io/case-ozon" target="_blank" rel="noopener">
+        <span class="job__name">OZON</span>
+        <span class="job__what">
+          <p>Observability for the platform team. Four separate tools for logs, traces and alerts became one incident workflow. I led eight designers across fifteen internal products.</p>
+          <p class="job__meta">Lead product designer. 2022 to 2024. Case study</p>
+        </span>
+        <span class="job__fig"><span class="job__num">−35%</span><span class="job__label">incident resolution time</span></span>
+      </a></li>
+
+      <li><a class="job" href="https://liza-chuiko-design.webflow.io/case-tribune" target="_blank" rel="noopener">
+        <span class="job__name">Tribune</span>
+        <span class="job__what">
+          <p>HR platform for remote teams. New navigation, org structure views and a design system, shaped by twenty customer interviews.</p>
+          <p class="job__meta">Senior product designer, part-time. 2023 to 2024. Case study</p>
+        </span>
+        <span class="job__fig"><span class="job__num">40+</span><span class="job__label">components in the system</span></span>
+      </a></li>
+
+      <li><a class="job" href="https://liza-chuiko-design.webflow.io/case-sberauto" target="_blank" rel="noopener">
+        <span class="job__name">Sber Auto</span>
+        <span class="job__what">
+          <p>Seller side of a car marketplace. The listing flow was rebuilt so that more sellers finish it, for private sellers and dealers alike.</p>
+          <p class="job__meta">Lead product designer. 2020 to 2022. Case study</p>
+        </span>
+        <span class="job__fig"><span class="job__num">9×</span><span class="job__label">more cars listed</span></span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section class="section" id="about" aria-labelledby="about-h">
+    <div class="section__head">
+      <h2 id="about-h">About</h2>
+    </div>
+    <div class="about">
+      <div class="about__text">
+        <p>I started as a front-end developer, moved into product design, and now do both. Research, flows and systems happen in Figma. The working product happens in code, with Claude Code and Cursor.</p>
+        <p>Most of my work is B2B and AI: internal tools, operator workflows, products where the hard part is making a complex system usable. I like teams where designers ship.</p>
+        <p>I live in London and have the right to work in the UK.</p>
       </div>
-      <div class="hero-meta">
-        <div class="hero-meta-item">
-          <span class="hero-meta-label">Location</span>
-          <span class="hero-meta-value">London, UK</span>
-        </div>
-        <div class="hero-meta-item">
-          <span class="hero-meta-label">Visa</span>
-          <span class="hero-meta-value">Global Talent</span>
-        </div>
-        <div class="hero-meta-item">
-          <span class="hero-meta-label">Experience</span>
-          <span class="hero-meta-value">7+ years</span>
-        </div>
-      </div>
+      <dl class="cv">
+        <div><dt>Tellis</dt><dd class="years">2026</dd><dd class="role">Product designer and builder, contract</dd></div>
+        <div><dt>ClaimSorted</dt><dd class="years">2025 to 2026</dd><dd class="role">Founding product designer</dd></div>
+        <div><dt>Picsart</dt><dd class="years">2024 to 2025</dd><dd class="role">Product designer</dd></div>
+        <div><dt>OZON</dt><dd class="years">2022 to 2024</dd><dd class="role">Lead product designer</dd></div>
+        <div><dt>Sber Auto</dt><dd class="years">2020 to 2022</dd><dd class="role">Lead product designer</dd></div>
+        <div><dt>Sports.ru</dt><dd class="years">2019 to 2020</dd><dd class="role">Product designer</dd></div>
+        <div><dt>SberMegaMarket</dt><dd class="years">2018 to 2019</dd><dd class="role">Front-end developer</dd></div>
+      </dl>
     </div>
   </section>
 
-  <!-- ─── VIBE CODING ─── -->
-  <div id="vibe" class="vibe-section">
-
-    <div class="vibe-header">
-      <div class="vibe-header-left">
-        <div class="vibe-eyebrow">New chapter — 2025</div>
-        <h2 class="vibe-title">Vibe<br><em>Coding</em><br>Era</h2>
-        <p class="vibe-desc">
-          I'm a designer who learned to <strong>build in code</strong>. Using Claude, Cursor, and MCP tools I prototype, ship, and iterate on real products — not just mockups. This page is one of them.
-        </p>
-        <p class="vibe-desc">
-          My GitHub is a live log of how I work: commits, experiments, mini-products, side hustles. Design thinking × engineering execution.
-        </p>
-        <div class="stack-row">
-          <span class="stack-pill"><span class="pill-dot"></span>Claude Sonnet</span>
-          <span class="stack-pill"><span class="pill-dot"></span>Cursor</span>
-          <span class="stack-pill"><span class="pill-dot"></span>MCP</span>
-          <span class="stack-pill"><span class="pill-dot"></span>HTML / CSS</span>
-          <span class="stack-pill"><span class="pill-dot"></span>JavaScript</span>
-          <span class="stack-pill"><span class="pill-dot"></span>React</span>
-          <span class="stack-pill"><span class="pill-dot"></span>GitHub Pages</span>
-          <span class="stack-pill"><span class="pill-dot"></span>Framer</span>
-        </div>
-        <a class="vibe-github-link" href="https://github.com/Lizachuiko" target="_blank">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-          github.com/Lizachuiko — see the commits →
-        </a>
-      </div>
-
-      <div class="vibe-header-right">
-        <div class="vibe-eyebrow">How I work now</div>
-        <div class="approach-list">
-          <div class="approach-item">
-            <span class="approach-num">01</span>
-            <div class="approach-text">
-              <strong>Idea → Prototype in hours</strong>
-              <span>MCP + Claude to go from concept to clickable prototype without leaving the design context.</span>
-            </div>
-          </div>
-          <div class="approach-item">
-            <span class="approach-num">02</span>
-            <div class="approach-text">
-              <strong>Design → Real code</strong>
-              <span>Cursor + Claude Sonnet to turn Figma into working HTML/CSS/React. No handoff needed.</span>
-            </div>
-          </div>
-          <div class="approach-item">
-            <span class="approach-num">03</span>
-            <div class="approach-text">
-              <strong>Ship, iterate, commit</strong>
-              <span>GitHub as a public log of process. Each project lives there — open, forkable, real.</span>
-            </div>
-          </div>
-          <div class="approach-item">
-            <span class="approach-num">04</span>
-            <div class="approach-text">
-              <strong>Side hustles as mini-products</strong>
-              <span>Building small things to learn fast — landing pages, tools, experiments. All live on GitHub Pages.</span>
-            </div>
-          </div>
-        </div>
-      </div>
+  <section class="section contact" id="contact" aria-labelledby="contact-h">
+    <div class="section__head">
+      <h2 id="contact-h">Contact</h2>
     </div>
-
-    <!-- BLOG / BUILDS FEED -->
-    <div class="section-header">
-      <span class="section-label">Building in Public — Log</span>
-      <span class="section-note">github.com/Lizachuiko</span>
+    <a class="contact__mail" id="mail" href="mailto:lizachuiko218@gmail.com">lizachuiko218@gmail.com</a>
+    <div class="contact__row">
+      <button class="copy" id="copy-mail" type="button">Copy email</button>
+      <a href="https://www.linkedin.com/in/elizaveta-chuiko-1a038ab4/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/Lizachuiko" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://liza-chuiko-design.webflow.io/" target="_blank" rel="noopener">Earlier case studies</a>
     </div>
-
-    <div class="blog-feed">
-
-      <a class="blog-card" href="https://github.com/Lizachuiko" target="_blank">
-        <div class="blog-date">Apr 2025</div>
-        <div class="blog-tag">Portfolio</div>
-        <div class="blog-title">This site — built with Claude</div>
-        <p class="blog-desc">Portfolio page vibe-coded from scratch using Claude Sonnet + Cursor. Zero templates. Hosted on GitHub Pages.</p>
-        <span class="blog-arrow">↗</span>
-      </a>
-
-      <a class="blog-card" href="https://github.com/Lizachuiko" target="_blank">
-        <div class="blog-date">Coming soon</div>
-        <div class="blog-tag">Mini-product</div>
-        <div class="blog-title">Project #2</div>
-        <p class="blog-desc">Next thing I'm building — will drop here when it's ready. Follow on GitHub for updates.</p>
-        <span class="blog-arrow">↗</span>
-      </a>
-
-      <a class="blog-card" href="https://github.com/Lizachuiko" target="_blank">
-        <div class="blog-date">Coming soon</div>
-        <div class="blog-tag">Experiment</div>
-        <div class="blog-title">Project #3</div>
-        <p class="blog-desc">Learning something new and shipping it publicly. More in the commits.</p>
-        <span class="blog-arrow">↗</span>
-      </a>
-
+    <div class="foot">
+      <span>© 2026 Liza Chuiko</span>
+      <span>Designed and built in code. <a href="https://github.com/Lizachuiko/Lizachuiko.github.io" target="_blank" rel="noopener">Source on GitHub</a></span>
     </div>
-  </div>
+  </section>
+</main>
 
-  <!-- DESIGN WORK -->
-  <div class="section-header" id="work">
-    <span class="section-label">Design Work — Selected Cases</span>
-    <span class="section-note">004 projects</span>
-  </div>
+<script>
+(() => {
+  const hero = document.querySelector('.hero');
+  const stage = hero.parentElement;
+  const canvas = hero.querySelector('.hero__glass');
+  const note = hero.querySelector('.hero__note');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  <div class="projects">
+  /* ── Name: two lines in the middle of the slab, on a plate that hugs the letters ── */
+  const nameEl = stage.querySelector('.hero__name');
+  const words = [...nameEl.querySelectorAll(':scope > span:not(.hero__plate)')];
+  const plateBlur = document.querySelector('#plate-goo feGaussianBlur');
+  let onName = () => {};                                    // set once the shader is up
+  function fitName() {
+    const foot = nameEl.parentElement;
+    const cs = getComputedStyle(foot);
+    const room = foot.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    nameEl.style.fontSize = '100px';
+    const widest = Math.max(...words.map(w => w.getBoundingClientRect().width));
+    const share = room < 700 ? 0.6 : 0.36;                   // the longer word takes this much of the slab
+    const size = Math.min(132, 100 * room * share / widest);
+    if (isFinite(size) && size > 0) {
+      nameEl.style.fontSize = size + 'px';
+      plateBlur.setAttribute('stdDeviation', (size * 0.2).toFixed(2));   // plate swells by about a quarter of an em
+    }
+    onName();
+  }
+  fitName();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitName);
+  addEventListener('resize', fitName);
 
-    <a class="project-card" href="https://liza-chuiko-design.webflow.io/case-ozon" target="_blank">
-      <div class="project-thumb thumb-ozon">
-        <span class="project-number">01</span>
-        <div class="project-thumb-placeholder">OZON</div>
-      </div>
-      <div class="project-info">
-        <div class="project-meta-row">
-          <div class="project-tags">
-            <span class="project-tag">B2B</span>
-            <span class="project-tag">Internal Tool</span>
-            <span class="project-tag">Monitoring</span>
-          </div>
-          <span class="project-year">2022–23</span>
-        </div>
-        <div class="project-name">Ozon — Incident Management</div>
-        <p class="project-desc">Unified observability platform merging logging, tracing and alerting into one interface for 90% of the IT team.</p>
-        <div class="project-metrics">
-          <div class="metric">
-            <span class="metric-value">−35%</span>
-            <span class="metric-label">Resolution time</span>
-          </div>
-          <div class="metric">
-            <span class="metric-value">+40%</span>
-            <span class="metric-label">Adoption</span>
-          </div>
-          <div class="metric">
-            <span class="metric-value">−12%</span>
-            <span class="metric-label">Incidents</span>
-          </div>
-        </div>
-        <div class="project-arrow">↗</div>
-      </div>
-    </a>
+  /* ── Copy email ── */
+  const copyBtn = document.getElementById('copy-mail');
+  copyBtn.addEventListener('click', () => {
+    const mail = document.getElementById('mail');
+    const done = () => { copyBtn.textContent = 'Copied'; setTimeout(() => (copyBtn.textContent = 'Copy email'), 1800); };
+    const select = () => { const r = document.createRange(); r.selectNodeContents(mail); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+    try { navigator.clipboard.writeText(mail.textContent).then(done, select); } catch (e) { select(); }
+  });
 
-    <a class="project-card" href="https://liza-chuiko-design.webflow.io/case-tribune" target="_blank">
-      <div class="project-thumb thumb-tribune">
-        <span class="project-number">02</span>
-        <div class="project-thumb-placeholder">TRIBUNE</div>
-      </div>
-      <div class="project-info">
-        <div class="project-meta-row">
-          <div class="project-tags">
-            <span class="project-tag">B2B</span>
-            <span class="project-tag">SaaS</span>
-            <span class="project-tag">HR Tech</span>
-          </div>
-          <span class="project-year">2024</span>
-        </div>
-        <div class="project-name">Tribune — HR Platform</div>
-        <p class="project-desc">Navigation overhaul, matrix org view, widget dashboards and smart calendar for global remote teams.</p>
-        <div class="project-metrics">
-          <div class="metric">
-            <span class="metric-value">+30%</span>
-            <span class="metric-label">DAU</span>
-          </div>
-          <div class="metric">
-            <span class="metric-value">+15pt</span>
-            <span class="metric-label">NPS</span>
-          </div>
-          <div class="metric">
-            <span class="metric-value">−20%</span>
-            <span class="metric-label">HR task time</span>
-          </div>
-        </div>
-        <div class="project-arrow">↗</div>
-      </div>
-    </a>
+  /* ── Portrait source: the photo if set, otherwise a drawn stand-in ── */
+  function drawStandIn() {
+    const c = document.createElement('canvas'); c.width = 1200; c.height = 1500;
+    const x = c.getContext('2d');
+    const ell = (cx, cy, rx, ry) => { x.beginPath(); x.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2); x.fill(); };
+    let g = x.createLinearGradient(0, 0, 0, 1500);
+    g.addColorStop(0, '#C3CEE4'); g.addColorStop(1, '#E6E9F1');
+    x.fillStyle = g; x.fillRect(0, 0, 1200, 1500);
+    // hair, back
+    x.fillStyle = '#3B2A25';
+    ell(600, 640, 440, 560);
+    x.beginPath(); x.moveTo(170, 640); x.bezierCurveTo(130, 1100, 150, 1400, 210, 1500);
+    x.lineTo(990, 1500); x.bezierCurveTo(1050, 1400, 1070, 1100, 1030, 640); x.closePath(); x.fill();
+    // strands
+    let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    x.lineWidth = 3;
+    for (let i = 0; i < 150; i++) {
+      const sx = 170 + rnd() * 860, lean = (sx - 600) * 0.12;
+      x.strokeStyle = `rgba(${150 + rnd() * 60 | 0},${105 + rnd() * 40 | 0},${85 + rnd() * 30 | 0},${0.10 + rnd() * 0.22})`;
+      x.beginPath(); x.moveTo(sx - lean, 120 + rnd() * 200);
+      x.bezierCurveTo(sx + lean * 0.4, 600, sx + lean, 1100, sx + lean * 1.2, 1500); x.stroke();
+    }
+    // shoulders
+    x.fillStyle = '#1D1F52';
+    x.beginPath(); x.moveTo(120, 1500); x.bezierCurveTo(190, 1290, 420, 1255, 600, 1255);
+    x.bezierCurveTo(780, 1255, 1010, 1290, 1080, 1500); x.closePath(); x.fill();
+    // neck
+    x.fillStyle = '#E0A68C';
+    x.beginPath(); x.moveTo(478, 1000); x.lineTo(722, 1000); x.lineTo(742, 1285);
+    x.quadraticCurveTo(600, 1365, 458, 1285); x.closePath(); x.fill();
+    // face
+    g = x.createRadialGradient(600, 660, 60, 600, 700, 420);
+    g.addColorStop(0, '#F8D3BD'); g.addColorStop(1, '#ECB398');
+    x.fillStyle = g; ell(600, 700, 300, 400);
+    // cheeks
+    for (const cx of [415, 785]) {
+      g = x.createRadialGradient(cx, 850, 0, cx, 850, 110);
+      g.addColorStop(0, 'rgba(238,128,120,0.38)'); g.addColorStop(1, 'rgba(238,128,120,0)');
+      x.fillStyle = g; ell(cx, 850, 110, 110);
+    }
+    // hair, front
+    x.fillStyle = '#3B2A25';
+    x.beginPath(); x.moveTo(282, 720); x.bezierCurveTo(262, 370, 520, 262, 650, 296);
+    x.bezierCurveTo(830, 286, 946, 420, 918, 720); x.bezierCurveTo(900, 560, 820, 446, 650, 408);
+    x.bezierCurveTo(520, 470, 336, 530, 282, 720); x.fill();
+    // brows
+    x.strokeStyle = '#3B2A25'; x.lineWidth = 17; x.lineCap = 'round';
+    x.beginPath(); x.moveTo(420, 624); x.quadraticCurveTo(486, 588, 552, 612); x.stroke();
+    x.beginPath(); x.moveTo(648, 612); x.quadraticCurveTo(714, 588, 780, 624); x.stroke();
+    // eyes
+    for (const cx of [486, 714]) {
+      x.fillStyle = '#FBF7F2'; ell(cx, 688, 64, 31);
+      x.fillStyle = '#6A4330'; ell(cx, 688, 29, 29);
+      x.fillStyle = '#170F0D'; ell(cx, 688, 13, 13);
+      x.fillStyle = '#FFFFFF'; ell(cx - 9, 679, 6, 6);
+      x.strokeStyle = '#3B2A25'; x.lineWidth = 7;
+      x.beginPath(); x.moveTo(cx - 68, 690); x.quadraticCurveTo(cx, 644, cx + 68, 690); x.stroke();
+    }
+    // nose
+    x.strokeStyle = '#D29378'; x.lineWidth = 10;
+    x.beginPath(); x.moveTo(596, 716); x.quadraticCurveTo(566, 836, 578, 862);
+    x.quadraticCurveTo(600, 884, 632, 864); x.stroke();
+    // lips
+    x.fillStyle = '#C4625C';
+    x.beginPath(); x.moveTo(498, 962); x.quadraticCurveTo(560, 924, 600, 946);
+    x.quadraticCurveTo(640, 924, 702, 962); x.quadraticCurveTo(600, 986, 498, 962); x.fill();
+    x.fillStyle = '#D67B72';
+    x.beginPath(); x.moveTo(498, 962); x.quadraticCurveTo(600, 1050, 702, 962);
+    x.quadraticCurveTo(600, 986, 498, 962); x.fill();
+    // grain
+    const im = x.getImageData(0, 0, 1200, 1500), d = im.data;
+    for (let i = 0; i < d.length; i += 4) { const n = (rnd() - 0.5) * 16; d[i] += n; d[i + 1] += n; d[i + 2] += n; }
+    x.putImageData(im, 0, 0);
+    return c;
+  }
 
-    <a class="project-card" href="https://liza-chuiko-design.webflow.io/case-sberauto" target="_blank">
-      <div class="project-thumb thumb-sber">
-        <span class="project-number">03</span>
-        <div class="project-thumb-placeholder">SBERAUTO</div>
-      </div>
-      <div class="project-info">
-        <div class="project-meta-row">
-          <div class="project-tags">
-            <span class="project-tag">B2C</span>
-            <span class="project-tag">Marketplace</span>
-            <span class="project-tag">Mobile</span>
-          </div>
-          <span class="project-year">2020–22</span>
-        </div>
-        <div class="project-name">SberAuto — Seller Flow</div>
-        <p class="project-desc">Simplified car listing with auto-fill from documents, drag-and-drop photos and real-time price estimates.</p>
-        <div class="project-metrics">
-          <div class="metric">
-            <span class="metric-value">+24%</span>
-            <span class="metric-label">Completed listings</span>
-          </div>
-          <div class="metric">
-            <span class="metric-value">9×</span>
-            <span class="metric-label">Assortment</span>
-          </div>
-          <div class="metric">
-            <span class="metric-value">−30%</span>
-            <span class="metric-label">Drop-off</span>
-          </div>
-        </div>
-        <div class="project-arrow">↗</div>
-      </div>
-    </a>
+  function loadPortrait() {
+    const src = hero.dataset.photo;
+    return new Promise(resolve => {
+      const standIn = () => { note.hidden = false; resolve(drawStandIn()); };
+      if (!src) return standIn();
+      const img = new Image();
+      img.onload = () => {
+        // keep the texture under 2400px on the long side
+        const k = Math.min(1, 2400 / Math.max(img.naturalWidth, img.naturalHeight));
+        const c = document.createElement('canvas');
+        c.width = Math.round(img.naturalWidth * k); c.height = Math.round(img.naturalHeight * k);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        resolve(c);
+      };
+      img.onerror = standIn;
+      img.src = src;
+    });
+  }
 
-    <a class="project-card" href="https://liza-chuiko-design.webflow.io/" target="_blank">
-      <div class="project-thumb thumb-postomates">
-        <span class="project-number">04</span>
-        <div class="project-thumb-placeholder">POSTOMATES</div>
-      </div>
-      <div class="project-info">
-        <div class="project-meta-row">
-          <div class="project-tags">
-            <span class="project-tag">Startup</span>
-            <span class="project-tag">Marketplace</span>
-          </div>
-          <span class="project-year">2023</span>
-        </div>
-        <div class="project-name">Postomates — Delivery App</div>
-        <p class="project-desc">Package delivery marketplace — end-to-end from zero: user flows, brand, mobile interface.</p>
-        <div class="project-arrow">↗</div>
-      </div>
-    </a>
+  /* ── Liquid glass: one fragment shader over the portrait ── */
+  const VERT = 'attribute vec2 a; varying vec2 vUv; void main(){ vUv = a * 0.5 + 0.5; gl_Position = vec4(a, 0.0, 1.0); }';
+  const FRAG = `
+    precision highp float;
+    varying vec2 vUv;
+    uniform sampler2D uTex, uPlate;
+    uniform vec2 uRes, uScale, uFocus, uM, uVel;
+    uniform float uT, uAmt, uRad, uGlass;
 
-  </div>
+    float slab(vec2 px) {
+      vec2 h = uRes * 0.5;
+      vec2 q = abs(px - h) - (h - uRad);
+      return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - uRad;
+    }
+    vec3 portrait(vec2 p) {
+      vec2 q = clamp((p - 0.5) * uScale + uFocus, 0.001, 0.999);
+      return texture2D(uTex, q).rgb;
+    }
+    vec3 frosted(vec2 p) {
+      vec2 q = clamp((p - 0.5) * uScale + uFocus, 0.001, 0.999);
+      return texture2D(uTex, q, 2.2).rgb;
+    }
+    void main() {
+      vec2 uv = vUv;
+      vec2 p = uv;
 
-  <!-- ABOUT -->
-  <div class="section-header" id="about">
-    <span class="section-label">About</span>
-  </div>
+      // a roll of glass lying across the face. It follows the pointer up and down
+      // and stretches height only: tall in the middle, pressed together at its shoulders.
+      float c = mix(0.27, 0.73, smoothstep(0.0, 1.0, uM.y));
+      float dy = uv.y - c;
+      float g = exp(-0.5 * dy * dy / (0.205 * 0.205));
+      float dx = uv.x - mix(0.5, uM.x, 0.4);
+      float across = 0.44 + 0.56 * exp(-dx * dx / 0.30);     // the roll is thickest where the pointer is
+      p.y -= dy * 0.67 * uAmt * g * across;
 
-  <div class="about">
-    <div class="about-text">
-      <h2>Design<br><em>+</em> build<br>+ ship</h2>
-      <p>Product and UI/UX designer based in London with <strong>7+ years</strong> building digital products — B2B SaaS, AI tools, marketplaces, internal platforms.</p>
-      <p>I own products end-to-end: research, system design, engineering collaboration, shipping. Currently adding <strong>code</strong> to that stack — building real things with Claude and Cursor.</p>
-      <p>Mentoring <strong>100+ designers</strong> through ADPList and Women in Tech — from first jobs to senior roles.</p>
-      <div class="visa-badge">🇬🇧 UK Global Talent Visa — Exceptional Promise</div>
-    </div>
-    <div class="about-right">
-      <div class="exp-group-title">Experience</div>
+      // the liquid lags behind the pointer, and never sits quite still
+      p.y -= uVel.y * g * 0.16;
+      p.y += uAmt * 0.0028 * (0.4 + g) * sin(uv.x * 7.0 + uT * 0.8);
 
-      <div class="exp-item">
-        <div>
-          <div class="exp-company">ClaimSorted</div>
-          <div class="exp-role">Product Designer — AI Startup</div>
-        </div>
-        <div>
-          <div class="exp-period">2025–26</div>
-          <div class="exp-type">Full-time</div>
-        </div>
-      </div>
+      // reeded edges: the top and bottom of the slab are cut into ribs, each one a small lens
+      float zone = 0.125;
+      float eb = uv.y / zone, et = (1.0 - uv.y) / zone;
+      float e1 = min(eb, et);
+      float crest = 0.0, groove = 0.0;
+      if (e1 < 1.0) {
+        float t = pow(max(e1, 0.0005), 0.78) * 5.0;             // ribs thin out toward the edge
+        float f = fract(t) - 0.5;
+        float w = zone * pow(max(e1, 0.02), 0.22) / 3.9;
+        float fade = smoothstep(1.0, 0.5, e1);
+        p.y += (eb < et ? 1.0 : -1.0) * f * w * 1.35 * fade * uAmt;
+        float h = 1.0 - abs(f) * 2.0;
+        crest = pow(h, 5.0) * fade;
+        groove = pow(1.0 - h, 7.0) * fade;
+      }
 
-      <div class="exp-item">
-        <div>
-          <div class="exp-company">Romantic AI</div>
-          <div class="exp-role">Product Designer — AI dating app</div>
-        </div>
-        <div>
-          <div class="exp-period">2024</div>
-          <div class="exp-type">Startup</div>
-        </div>
-      </div>
+      // the thick rim of the slab bends the picture inward
+      vec2 px = uv * uRes;
+      float d = slab(px);
+      float w2 = min(uRes.x, uRes.y) * 0.075;
+      float e = smoothstep(-w2, 0.0, d);
+      vec2 n = normalize(vec2(slab(px + vec2(1.0, 0.0)) - d, slab(px + vec2(0.0, 1.0)) - d) + 1e-5);
+      p -= n * e * e * e * (w2 * 1.5) / uRes;
 
-      <div class="exp-item">
-        <div>
-          <div class="exp-company">Ozon</div>
-          <div class="exp-role">Senior Product Designer — B2B / ecom</div>
-        </div>
-        <div>
-          <div class="exp-period">2022–23</div>
-          <div class="exp-type">Full-time</div>
-        </div>
-      </div>
+      // the name plate: a thick pebble of glass lying on the picture. uPlate is its height,
+      // 0 outside, 1 on the flat top; the letters sit on it as plain type.
+      float H = texture2D(uPlate, uv).r * uGlass;
+      float inside = smoothstep(0.46, 0.54, H);
+      float bevel = 0.0;
+      vec2 gN = vec2(0.0);
+      if (H > 0.01) {
+        vec2 st = 3.0 / uRes;
+        gN = vec2(texture2D(uPlate, uv + vec2(st.x, 0.0)).r - texture2D(uPlate, uv - vec2(st.x, 0.0)).r,
+                  texture2D(uPlate, uv + vec2(0.0, st.y)).r - texture2D(uPlate, uv - vec2(0.0, st.y)).r);
+        float glen = length(gN);
+        gN = glen > 1e-4 ? gN / glen : vec2(0.0);                    // points up the slope, into the plate
+        bevel = inside * (1.0 - smoothstep(0.5, 0.97, H));       // the rounded shoulder
+        p += gN * bevel * bevel * 0.085 * vec2(uRes.y / uRes.x, 1.0);   // the shoulder is a lens
+      }
 
-      <div class="exp-item">
-        <div>
-          <div class="exp-company">SberAuto</div>
-          <div class="exp-role">Lead Product Designer — Marketplace</div>
-        </div>
-        <div>
-          <div class="exp-period">2020–22</div>
-          <div class="exp-type">Full-time</div>
-        </div>
-      </div>
+      // dispersion grows with the amount of bending
+      vec2 off = (p - uv) * 0.07;
+      off *= min(1.0, 0.0045 / (length(off) + 1e-5));
+      vec3 col = vec3(portrait(p + off).r, portrait(p).g, portrait(p - off).b);
 
-      <div class="exp-item">
-        <div>
-          <div class="exp-company">Sports.ru</div>
-          <div class="exp-role">Product Designer — Media / Health</div>
-        </div>
-        <div>
-          <div class="exp-period">2019–20</div>
-          <div class="exp-type">Full-time</div>
-        </div>
-      </div>
+      // light in the glass
+      float sh = 4.0 * g * (1.0 - g);                                        // the roll's shoulders
+      col += sh * 0.085 * uAmt * across * smoothstep(-0.03, 0.12, dy);       // upper one catches the light
+      col *= 1.0 - sh * 0.07 * uAmt * across * smoothstep(0.03, -0.12, dy);  // lower one sits in shade
+      float streak = exp(-pow((dy - 0.27) / 0.022, 2.0));                       // soft glint along the upper shoulder
+      col += streak * 0.06 * uAmt * across * across;
+      col += crest * 0.09 - groove * 0.08;
+      col += pow(e, 5.0) * 0.24;                                             // rim
 
-      <div class="exp-item">
-        <div>
-          <div class="exp-company">Tribune / imii</div>
-          <div class="exp-role">Senior Designer — HR tech, AI immigration</div>
-        </div>
-        <div>
-          <div class="exp-period">2023–24</div>
-          <div class="exp-type">Part-time</div>
-        </div>
-      </div>
+      if (H > 0.01) {
+        // frost: what lies under the plate goes soft, a little deeper and cooler
+        vec2 ar = vec2(uRes.y / uRes.x, 1.0) * 0.011;
+        vec3 fr = frosted(p);
+        for (int i = 0; i < 6; i++) {
+          float a = float(i) * 1.0472;
+          fr += frosted(p + vec2(cos(a), sin(a)) * ar);
+        }
+        fr /= 7.0;
+        vec3 body = fr * vec3(0.84, 0.85, 0.90) + vec3(0.03, 0.03, 0.045);
+        col = mix(col, body, inside * 0.92);
+        // light from the upper left: bright shoulder facing it, a thinner glow on the far side
+        vec2 L = normalize(vec2(-0.45, 0.89));
+        float lit = max(dot(-gN, L), 0.0), back = max(dot(gN, L), 0.0);
+        col += bevel * (0.62 * lit * lit + 0.24 * back * back * back);
+        col *= 1.0 - bevel * 0.16 * back * (1.0 - back);
+        float edge = inside * (1.0 - smoothstep(0.54, 0.64, H));               // hairline at the very edge
+        col += edge * (0.14 + 0.34 * lit + 0.10 * back);
+        // the plate's own shadow on the picture below it
+        float Hs = texture2D(uPlate, uv + vec2(0.006, 0.016)).r * uGlass;
+        col *= 1.0 - smoothstep(0.2, 0.62, Hs) * (1.0 - inside) * 0.2;
+      }
+      gl_FragColor = vec4(col, 1.0);
+    }`;
 
-    </div>
-  </div>
+  const gl = canvas.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'high-performance' });
 
-  <!-- FOOTER -->
-  <footer id="contact">
-    <div>
-      <div class="footer-cta-label">Get in touch</div>
-      <div class="footer-cta">
-        Let's build<br>something —<br><a href="mailto:lizachuiko218@gmail.com">say hello ↗</a>
-      </div>
-    </div>
-    <div class="footer-right">
-      <div class="footer-links">
-        <a href="https://github.com/Lizachuiko" target="_blank">GitHub</a>
-        <a href="https://www.linkedin.com/in/elizaveta-chuiko-1a038ab4/" target="_blank">LinkedIn</a>
-        <a href="https://liza-chuiko-design.webflow.io/" target="_blank">Full Portfolio →</a>
-        <a href="mailto:lizachuiko218@gmail.com">lizachuiko218@gmail.com</a>
-      </div>
-      <div class="footer-copy">© 2025 Liza Chuiko — London, UK</div>
-    </div>
-  </footer>
+  function still(source) {
+    // no WebGL: show the portrait as a plain picture
+    const img = document.createElement('img');
+    img.className = 'hero__still'; img.alt = '';
+    img.src = source.toDataURL('image/jpeg', 0.9);
+    canvas.replaceWith(img);
+  }
 
+  loadPortrait().then(source => {
+    if (!gl) return still(source);
+
+    const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; };
+    const prog = gl.createProgram();
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, VERT));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FRAG));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return still(source);
+    gl.useProgram(prog);
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, 'a');
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
+    // power-of-two copy so the squeezed edges can use mipmaps instead of shimmering
+    const pot = n => Math.min(2048, Math.pow(2, Math.ceil(Math.log2(n))));
+    const texel = document.createElement('canvas');
+    texel.width = pot(source.width); texel.height = pot(source.height);
+    texel.getContext('2d').drawImage(source, 0, 0, texel.width, texel.height);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, texel);
+    gl.generateMipmap(gl.TEXTURE_2D);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+    const U = {};
+    for (const n of ['uRes', 'uScale', 'uFocus', 'uM', 'uVel', 'uT', 'uAmt', 'uRad', 'uPlate', 'uGlass']) U[n] = gl.getUniformLocation(prog, n);
+
+    const focusIn = (hero.dataset.focus || '0.5 0.45').split(/\s+/).map(Number);
+    const zoom = Number(hero.dataset.zoom) || 1;
+    const keep = Number(hero.dataset.keep) || 0;          // share of the photo's width that must stay in view
+    const imgAsp = source.width / source.height;
+
+    function resize() {
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      const w = Math.max(1, Math.round(hero.clientWidth * dpr)), h = Math.max(1, Math.round(hero.clientHeight * dpr));
+      if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+      gl.viewport(0, 0, w, h);
+      const asp = w / h;
+      let sx = 1, sy = 1;
+      if (asp > imgAsp) sy = imgAsp / asp; else sx = asp / imgAsp;
+      // crop in on the face, but never tighter than `keep` of the photo's width (narrow screens)
+      const z = Math.max(1, keep ? Math.min(zoom, sx / keep) : zoom);
+      sx /= z; sy /= z;
+      const fx = Math.min(1 - sx / 2, Math.max(sx / 2, focusIn[0]));
+      const fy = Math.min(1 - sy / 2, Math.max(sy / 2, 1 - focusIn[1]));
+      gl.uniform2f(U.uRes, w, h);
+      gl.uniform2f(U.uScale, sx, sy);
+      gl.uniform2f(U.uFocus, fx, fy);
+      gl.uniform1f(U.uRad, parseFloat(getComputedStyle(hero).borderTopLeftRadius) * dpr);
+    }
+
+    // the name plate's height map: the two words, swollen and softened, drawn where the type stands
+    const plateCv = document.createElement('canvas'), pc = plateCv.getContext('2d');
+    const plateTex = gl.createTexture();
+    gl.uniform1i(U.uPlate, 1);
+    function buildPlate() {
+      const r = hero.getBoundingClientRect();
+      if (!r.width || !r.height) return;
+      const s = Math.min(1, 1000 / r.width);
+      const w = Math.max(2, Math.round(r.width * s)), h = Math.max(2, Math.round(r.height * s));
+      plateCv.width = w; plateCv.height = h;
+      const fs = parseFloat(getComputedStyle(nameEl).fontSize) * s;
+      pc.fillStyle = '#000'; pc.fillRect(0, 0, w, h);
+      pc.font = `820 extra-expanded ${fs}px "Roboto Flex", "Arial Black", sans-serif`;
+      pc.textBaseline = 'alphabetic'; pc.lineJoin = 'round';
+      pc.lineWidth = fs * 0.6;                                // how far the plate swells past the letters
+      pc.fillStyle = pc.strokeStyle = '#fff';
+      // drawn off to the left; only the blurred shadow lands on the canvas, which softens the edge
+      const OFF = w * 3;
+      pc.shadowColor = '#fff'; pc.shadowBlur = fs * 0.2; pc.shadowOffsetX = OFF; pc.shadowOffsetY = 0;
+      for (const word of words) {
+        const b = word.getBoundingClientRect(), txt = word.textContent;
+        const m = pc.measureText(txt);
+        const asc = m.fontBoundingBoxAscent || fs * 0.93, desc = m.fontBoundingBoxDescent || fs * 0.24;
+        pc.save();
+        pc.translate((b.left - r.left) * s - OFF, (b.top - r.top) * s + (b.height * s - asc - desc) / 2 + asc);
+        pc.scale(b.width * s / m.width, 1);                  // match the width the page gave the word
+        pc.strokeText(txt, 0, 0); pc.fillText(txt, 0, 0);
+        pc.restore();
+      }
+      gl.activeTexture(gl.TEXTURE1);
+      gl.bindTexture(gl.TEXTURE_2D, plateTex);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.LUMINANCE, gl.LUMINANCE, gl.UNSIGNED_BYTE, plateCv);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.activeTexture(gl.TEXTURE0);
+      gl.uniform1f(U.uGlass, 1);
+      stage.classList.add('glass-on');
+    }
+
+    // pointer, with the weight of a liquid
+    const pos = { x: 0.5, y: reduce ? 0.56 : 1.2 }, vel = { x: 0, y: 0 }, target = { x: 0.5, y: 0.56 };
+    let amt = reduce ? 1 : 0, t = 0, last = performance.now(), running = false, raf = 0;
+    const K = 38, C = reduce ? 12.4 : 7.5;
+
+    stage.addEventListener('pointermove', e => {
+      const r = hero.getBoundingClientRect();
+      target.x = (e.clientX - r.left) / r.width;
+      target.y = 1 - (e.clientY - r.top) / r.height;
+      kick();
+    });
+
+    function draw() {
+      gl.uniform2f(U.uM, pos.x, pos.y);
+      gl.uniform2f(U.uVel, Math.max(-0.05, Math.min(0.05, vel.x * 0.06)), Math.max(-0.05, Math.min(0.05, vel.y * 0.06)));
+      gl.uniform1f(U.uT, t);
+      gl.uniform1f(U.uAmt, amt);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
+    function frame(now) {
+      const dt = Math.min((now - last) / 1000, 0.05); last = now;
+      if (!reduce) t += dt;
+      for (const ax of ['x', 'y']) {
+        vel[ax] += ((target[ax] - pos[ax]) * K - vel[ax] * C) * dt;
+        pos[ax] += vel[ax] * dt;
+      }
+      amt += (1 - amt) * Math.min(1, dt * 1.6);
+      draw();
+      const settled = Math.abs(target.x - pos.x) + Math.abs(target.y - pos.y) + Math.abs(vel.x) + Math.abs(vel.y) + Math.abs(1 - amt) < 0.002;
+      raf = running && !settled ? requestAnimationFrame(frame) : 0;
+    }
+    function kick() { if (!raf && running) { last = performance.now(); raf = requestAnimationFrame(frame); } }
+
+    let onScreen = true;
+    const sync = () => { running = onScreen && !document.hidden; kick(); };
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(es => { onScreen = es[0].isIntersecting; sync(); }).observe(hero);
+    }
+    document.addEventListener('visibilitychange', sync);
+    addEventListener('resize', () => { resize(); buildPlate(); if (!raf) draw(); });
+    onName = () => { buildPlate(); if (!raf) draw(); };
+
+    resize();
+    buildPlate();
+    draw();
+    sync();
+  });
+})();
+</script>
 </body>
 </html>

@@ -1,2 +1,6 @@
 .DS_Store
 **/.DS_Store
+
+# local notes and drafts for Claude Code, not part of the public site
+CLAUDE.md
+drafts/
