@@ -836,9 +836,49 @@
       kick();
     });
     const release = () => { amtTo = 0; kick(); };
-    stage.addEventListener('pointerleave', release);
+    stage.addEventListener('pointerleave', e => { if (e.pointerType !== 'touch') release(); });
     document.addEventListener('mouseleave', release);       // the pointer left the window altogether
     addEventListener('blur', release);
+
+    // Phones have nothing to hover with. There the roll of glass hangs at eye level on the screen and
+    // the portrait slides under it as the page scrolls; a touch pulls it under the finger for a moment.
+    const touchUI = matchMedia('(hover: none), (pointer: coarse)').matches || /[?&]touch\b/.test(location.search);
+    if (touchUI) {
+      let held = false, letGo = 0, intro = !reduce;
+      const atTop = () => scrollY <= 8;
+      const follow = () => {
+        if (held || reduce) return;
+        const r = hero.getBoundingClientRect();
+        if (atTop() || r.bottom < 0) { if (!intro) release(); return; }   // browsers fire a scroll event on load
+        intro = false;
+        target.x = 0.5;
+        target.y = Math.min(1, Math.max(0, 1 - (innerHeight * 0.42 - r.top) / r.height));
+        amtTo = 1; kick();
+      };
+      addEventListener('scroll', follow, { passive: true });
+      const touch = e => {
+        if (e.pointerType !== 'touch') return;
+        const r = hero.getBoundingClientRect();
+        target.x = (e.clientX - r.left) / r.width;
+        target.y = 1 - (e.clientY - r.top) / r.height;
+        if (amt < 0.02) { pos.x = target.x; pos.y = target.y; vel.x = vel.y = 0; }
+        held = true; intro = false; amtTo = 1; clearTimeout(letGo); kick();
+      };
+      const lift = e => {
+        if (e.pointerType !== 'touch' || !held) return;
+        held = false; clearTimeout(letGo);
+        letGo = setTimeout(() => (atTop() ? release() : follow()), 1300);
+      };
+      stage.addEventListener('pointerdown', touch);
+      stage.addEventListener('pointermove', e => { if (held) touch(e); });
+      stage.addEventListener('pointerup', lift);
+      stage.addEventListener('pointercancel', lift);
+      // on opening, pass the roll over the face once to show what the glass does, then leave the photo alone
+      if (intro) {
+        pos.y = 0.98; target.y = 0.36; amtTo = 1;
+        letGo = setTimeout(() => { intro = false; if (!held) (atTop() ? release() : follow()); }, 2200);
+      }
+    }
 
     function draw() {
       gl.uniform2f(U.uM, pos.x, pos.y);
